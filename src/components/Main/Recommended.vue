@@ -51,6 +51,16 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  .main{
+    height: 100%;
+    background-color: #ffffff;
+  }
+  .main-div {
+    margin-left: 20%;
+    margin-right: 20%;
+    background-color: #ffffff;
+    height: 100%;
+  }
 
 </style>

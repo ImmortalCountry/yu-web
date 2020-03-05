@@ -8,6 +8,7 @@ import Friend from "../components/Main/Friend";
 import Spit from "../components/Main/Spit";
 import Recruit from "../components/Main/Recruit";
 import Article from "../components/Article/Article";
+import ArticleDetail from "../components/Article/ArticleDetail";
 
 Vue.use(Router);
 
@@ -51,5 +52,9 @@ export default new Router({
         },
       ]
     },
+    {
+      path: '/article/detail',
+      component: ArticleDetail
+    }
   ]
 })

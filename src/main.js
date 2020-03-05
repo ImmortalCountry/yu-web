@@ -10,9 +10,8 @@ import '@/style/global.css'
 
 
 Vue.use(ElementUI);
-
 Vue.prototype.$http = axios;
-
+Vue.config.devtools = true;
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

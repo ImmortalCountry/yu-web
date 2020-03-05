@@ -15,10 +15,10 @@
                 <li>类别</li>
               </ul>
             </div>
-            <div class="title-row" style="cursor: pointer" @click="test">
+            <div class="title-row" style="cursor: pointer" @click="goDetail(item.user_id, item.id)">
               <!--              <a style="margin-left: 10px" @click="test"></a>-->
-              <el-link ><b style="color: black; font-size: medium">{{item.title}}</b></el-link>
-              <div style="color: #b2bac2; font-size: xx-small; width: 250px" >{{item.content}}</div>
+              <el-link><b style="color: black; font-size: medium">{{item.title}}</b></el-link>
+              <div style="color: #b2bac2; font-size: xx-small; width: 250px">{{item.content}}</div>
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@
         let page = this.count;
         let size = 10;//每页查询条数
         const {data: res} = await this.$http.get(`http://localhost:9003/article/${page}/${size}`);
-        if (res.flag){
+        if (res.flag) {
           this.articleList = this.articleList.concat(res.data.rows);
           this.totalPages = res.data.total;
           this.loading = false;
@@ -71,13 +71,12 @@
           this.getArticleList(); //调用接口，此时页数+1，查询下一页数据
         }, 2000);
       },
-      test() {
+      goDetail(author_id, article_id) {
         let routeData = this.$router.resolve({
-          path: "/about",
+          path: "/article/detail",
           query: {
-            name: 'lei',
-            age: 18,
-            phoneNum: 12345678901
+            author_id: author_id,
+            article_id: article_id
           }
         });
         window.open(routeData.href, '_blank');
@@ -121,7 +120,8 @@
   .infinite-list-wrapper {
     background-color: #ffffff;
   }
-  p{
+
+  p {
     color: #b2bac2;
     text-align: center;
   }
