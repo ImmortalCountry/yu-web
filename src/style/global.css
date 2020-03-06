@@ -4,6 +4,14 @@ html, body, #app {
   margin: 0;
   padding: 0;
 }
+
 .el-header {
   background-color: #ffffff;
+}
+
+.div-body {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1920px;
+  height: 3050px;
 }
