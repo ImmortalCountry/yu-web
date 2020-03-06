@@ -9,11 +9,22 @@ import Spit from "../components/Main/Spit";
 import Recruit from "../components/Main/Recruit";
 import Article from "../components/Article/Article";
 import ArticleDetail from "../components/Article/ArticleDetail";
+import WriteArticle from "../components/Article/WriteArticle"
 
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
+  base: '',
   routes: [
+    {
+      path: '/welcome/article/write',
+      redirect: '/article/write',
+    },
+    {
+      path: '/article/write',
+      component: WriteArticle
+    },
     {
       path: '/',
       name: 'Home',
@@ -55,6 +66,10 @@ export default new Router({
     {
       path: '/article/detail',
       component: ArticleDetail
+    },
+    {
+      path: '**/article/write',
+      redirect: "/article/write"
     }
   ]
 })

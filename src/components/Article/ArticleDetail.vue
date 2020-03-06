@@ -20,12 +20,13 @@
                   </div>
                 </el-col>
                 <el-col :span="15">
-                  <el-row :gutter="20" style="margin-top: 23px"><span>{{authorInfo.name}}小明</span></el-row>
+                  <el-row :gutter="20" style="margin-top: 23px"><span>{{authorInfo.author_name}}</span></el-row>
                   <el-row :gutter="20" style="margin-top: 10px"><span>{{articleInfo.create_time}}</span></el-row>
                 </el-col>
 
                 <el-col :span="3">
-                  <el-button type="success" size="medium" style="margin-top: 28px">{{buttonInfo}}已关注</el-button>
+                  <el-button :type=btnType size="medium" style="margin-top: 28px" @click="attention" v-text=buttonInfo>
+                  </el-button>
                 </el-col>
               </el-row>
 
@@ -79,13 +80,16 @@
           author_id: '',
           author_name: ''
         },
-        is_attention: '',
-        buttonInfo: ''
+        is_attention: 'false',
+        buttonInfo: '未关注',
+        btnType: ''
       }
     },
     created() {
       this.init();
       this.getDetail();
+      this.getAuthor(this.authorInfo.author_id);
+      this.getBtnType();
     },
     methods: {
       init() {
@@ -93,18 +97,43 @@
         this.authorInfo.author_id = this.$route.query.author_id;
         this.articleInfo.article_id = this.$route.query.article_id;
       },
-      async getDetail() {
-        axios.defaults.baseURL = '';
-        const {data: res} = await axios.get(`http://localhost:9003/article/detail/${this.authorInfo.author_id}/${this.articleInfo.article_id}`);
-        if (res.flag) {
+      getDetail() {
+        this.$api.article.articleDetail(this.authorInfo.author_id, this.articleInfo.article_id).then(res => {
           this.authorInfo.author_name = res.data.author_name;
           this.articleInfo.title = res.data.title;
           this.articleInfo.content = res.data.content;
           this.articleInfo.create_time = res.data.create_time
-        }
+        })
+        // axios.defaults.baseURL = '';
+        // const {data: res} = await axios.get(`articles/detail/${this.authorInfo.author_id}/${this.articleInfo.article_id}`);
+        // if (res.flag) {
+        //   this.authorInfo.author_name = res.data.author_name;
+        //   this.articleInfo.title = res.data.title;
+        //   this.articleInfo.content = res.data.content;
+        //   this.articleInfo.create_time = res.data.create_time
+        // }
         // console.log(this.$http);
         // this.$http.defaults.baseURL = '';
         //await this.$http.get(`http:localhost:9003/article/detail/${this.user_id}/${this.article_id}`)
+      },
+      getAuthor(id) {
+        this.$api.user.userInfo(id).then(res => {
+          this.authorInfo.author_name = res.data.nick_name;
+          this.authorInfo.author_id = res.data.id;
+
+        })
+      },
+      attention() {
+        this.is_attention = !this.is_attention;
+        this.getBtnType();
+        if (this.is_attention === false) {
+          this.buttonInfo = "未关注"
+        } else {
+          this.buttonInfo = "已关注"
+        }
+      },
+      getBtnType(){
+        this.btnType = this.is_attention === true ? 'success':'';
       }
     }
   }

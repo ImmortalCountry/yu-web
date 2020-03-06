@@ -7,8 +7,8 @@
         router
         active-text-color="#409EFF"
         mode="horizontal">
-        <el-menu-item :index="'/' + item.path" v-for="item in labelList" :key="item.id">
-          <span>{{item.label_name}}</span>
+        <el-menu-item :index="'/' + item.path" v-for="item in channelList" :key="item.id">
+          <span>{{item.name}}</span>
         </el-menu-item>
       </el-menu>
     </el-header>
@@ -24,22 +24,21 @@
   export default {
     data() {
       return {
-        labelList: [],
-        activePath:''
+        channelList: [],
+        activePath: ''
       }
     },
     created() {
-      this.getLabelList();
+      this.getChannelList();
       //this.activePath = window.sessionStorage.getItem('activePath')
       //this.activePath = window.sessionStorage.getItem('activePath')
     },
     methods: {
-      async getLabelList() {
+      getChannelList() {
         // 获取所有模块
-        const {data: res} = await this.$http.get('http://localhost:9001/label');
-        if (res.flag) {
-          this.labelList = res.data;
-        }
+        this.$api.article.channelList().then(res => {
+          this.channelList = res.data;
+        })
       },
       // 保存高亮的路径
       // saveNavState(activePath){
@@ -52,10 +51,11 @@
 </script>
 
 <style scoped lang="scss">
-  .main{
+  .main {
     height: 100%;
     background-color: #ffffff;
   }
+
   .main-div {
     margin-left: 20%;
     margin-right: 20%;

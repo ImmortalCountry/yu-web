@@ -53,15 +53,14 @@
       }
     },
     methods: {
-      async getArticleList() {
+      getArticleList() {
         let page = this.count;
         let size = 10;//每页查询条数
-        const {data: res} = await this.$http.get(`http://localhost:9003/article/${page}/${size}`);
-        if (res.flag) {
+        this.$api.article.articleList(page, size).then(res => {
           this.articleList = this.articleList.concat(res.data.rows);
           this.totalPages = res.data.total;
           this.loading = false;
-        }
+        })
       },
       load() {
         //滑到底部时进行加载
