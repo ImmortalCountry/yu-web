@@ -54,9 +54,14 @@
     },
     methods: {
       addArticle() {
+        if (window.sessionStorage.getItem("user") !== null || window.sessionStorage.getItem("user") !== "") {
+          let user = JSON.parse(window.sessionStorage.getItem("user"))
+          this.Args.author_id = user.id;
+        }
         this.$api.article.articleSave(this.Args).then(res => {
           this.$message.success("success")
-        })
+        });
+        this.$router.go(0)
       },
       getChannelList() {
         // 获取所有模块

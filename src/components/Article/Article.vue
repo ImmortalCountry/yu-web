@@ -18,7 +18,7 @@
             <div class="title-row" style="cursor: pointer" @click="goDetail(item.user_id, item.id)">
               <!--              <a style="margin-left: 10px" @click="test"></a>-->
               <el-link><b style="color: black; font-size: medium">{{item.title}}</b></el-link>
-              <div style="color: #b2bac2; font-size: xx-small; width: 250px">{{item.content}}</div>
+              <div style="color: #b2bac2; font-size: xx-small; width: 250px">{{contentHandler(item.content) + "..."}}</div>
             </div>
           </div>
         </div>
@@ -34,9 +34,10 @@
   export default {
     watch: {
       getChannelId(val) {
-        console.log("我被监听")
         this.searchMap.channelId = val;
-        this.articleList=[];
+        this.articleList = [];
+        this.count = 1;
+        this.totalPages = '';
         this.getArticleList();
       }
     },
@@ -67,6 +68,9 @@
       }
     },
     methods: {
+      contentHandler(content){
+        return content.slice(0,20);
+      },
       getArticleList() {
         let page = this.count;
         let size = 10;//每页查询条数
