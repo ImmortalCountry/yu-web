@@ -8,6 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import '@/style/global.css'
 import api from '@/request/api'
 import store from './store/store.js';
+import userUtils from '@/utils/login.js'
 
 Vue.prototype.$api = api
 
@@ -21,6 +22,7 @@ new Vue({
   el: '#app',
   router,
   store,
+  userUtils,
   components: {App},
   template: '<App/>'
 })

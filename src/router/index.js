@@ -12,7 +12,10 @@ import ArticleDetail from "../components/Article/ArticleDetail";
 import WriteArticle from "../components/Article/WriteArticle"
 
 Vue.use(Router);
-
+const routerPush = Router.prototype.push;
+Router.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error=> error)
+};
 export default new Router({
   mode: 'history',
   base: '',

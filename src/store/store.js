@@ -5,7 +5,10 @@ Vue.use(Vuex);
 let store = new Vuex.Store({
   // 1. state
   state: {
-    channelId: '1'
+    channelId: '1',
+    isLogin: false,
+    token: '',
+    user: null
   },
 
   // // 2. getters
@@ -13,6 +16,9 @@ let store = new Vuex.Store({
     // 参数列表state指的是state数据
     getChannelId(state) {
       return state.channelId;
+    },
+    getUserInfo(state){
+      return state.user;
     }
   },
   // 3. actions
@@ -25,6 +31,9 @@ let store = new Vuex.Store({
     // name就是调用此方法时要传的参数
     setChannelId({commit, state}, id) {
       commit("setChannelId", id);
+    },
+    setUserInfo({commit, state}, user){
+      commit("setUserInfo", user);
     }
   },
   // 4. mutations
@@ -33,6 +42,11 @@ let store = new Vuex.Store({
     // name传递过来的数据
     setChannelId(state, id) {
       state.channelId = id;//将传参设置给state的channelId
+    },
+    setUserInfo(state, user){
+      console.log("我被设置啦")
+      state.user = user;
+      console.log(state.user)
     }
   }
 });

@@ -34,6 +34,7 @@
   export default {
     watch: {
       getChannelId(val) {
+        console.log("我被监听")
         this.searchMap.channelId = val;
         this.articleList=[];
         this.getArticleList();

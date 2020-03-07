@@ -12,6 +12,11 @@ const user = {
     const {data: res} = await axios.get(`${linkUrl.userUrl}/users/attention/${userId}/${targetUserId}`);
     return res
   },
+  // 登录
+  async login(loginForm) {
+    const {data: res} = await axios.post(`${linkUrl.userUrl}/users/login`, loginForm);
+    return res
+  },
 
 };
 export default user;
