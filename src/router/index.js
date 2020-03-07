@@ -10,7 +10,7 @@ import Recruit from "../components/Main/Recruit";
 import Article from "../components/Article/Article";
 import ArticleDetail from "../components/Article/ArticleDetail";
 import WriteArticle from "../components/Article/WriteArticle"
-
+import House from "../components/Main/House"
 Vue.use(Router);
 const routerPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
@@ -71,8 +71,16 @@ export default new Router({
       component: ArticleDetail
     },
     {
+      path: '/user/house',
+      component: House
+    },
+    {
       path: '**/article/write',
       redirect: "/article/write"
+    },
+    {
+      path: '**/user/friend',
+      redirect: "/user/friend"
     }
   ]
 })
