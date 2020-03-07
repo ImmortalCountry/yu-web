@@ -1,6 +1,6 @@
 <template>
-    <div>
-      活动
+    <div class="home">
+
     </div>
 </template>
 
