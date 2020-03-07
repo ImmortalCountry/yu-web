@@ -7,6 +7,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import '@/style/global.css'
 import api from '@/request/api'
+import store from './store/store.js';
 
 Vue.prototype.$api = api
 
@@ -19,6 +20,7 @@ Vue.config.productionTip = false;
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  store,
+  components: {App},
   template: '<App/>'
 })

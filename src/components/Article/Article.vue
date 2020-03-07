@@ -32,8 +32,18 @@
 
 <script>
   export default {
+    watch: {
+      getChannelId(val) {
+        this.searchMap.channelId = val;
+        this.articleList=[];
+        this.getArticleList();
+      }
+    },
     data() {
       return {
+        searchMap: {
+          channelId: '1',
+        },
         articleList: [],
         loading: false,
         count: 1,//起始页数值为0
@@ -50,13 +60,16 @@
       },
       disabled() {
         return this.loading || this.noMore
+      },
+      getChannelId() {
+        return this.$store.getters.getChannelId;
       }
     },
     methods: {
       getArticleList() {
         let page = this.count;
         let size = 10;//每页查询条数
-        this.$api.article.articleList(page, size).then(res => {
+        this.$api.article.articleList(page, size, this.searchMap).then(res => {
           this.articleList = this.articleList.concat(res.data.rows);
           this.totalPages = res.data.total;
           this.loading = false;

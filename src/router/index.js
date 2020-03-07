@@ -36,7 +36,7 @@ export default new Router({
           redirect: '/welcome/recommended',
           children: [
             {
-              path: 'welcome/recommended',
+              path: 'welcome/*',
               component: Article
             }
           ]

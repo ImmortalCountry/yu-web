@@ -15,7 +15,6 @@ instance.interceptors.response.use(
   },
   // 请求失败
   error => {
-    alert("请求失败啦")
     // const {response} = error;
     // if (response) {
     //   // 请求已发出，但是不在2xx的范围

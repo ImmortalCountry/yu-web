@@ -25,7 +25,8 @@
                 </el-col>
 
                 <el-col :span="3">
-                  <el-button :type=btnType size="medium" style="margin-top: 28px" @click="attention" v-text=buttonInfo>
+                  <el-button :type=btnType size="medium" style="margin-top: 28px" @click="attentionHandle"
+                             v-text=buttonInfo>
                   </el-button>
                 </el-col>
               </el-row>
@@ -61,7 +62,6 @@
 </template>
 
 <script>
-  import axios from 'axios'
 
   export default {
     components: {
@@ -89,13 +89,12 @@
       this.init();
       this.getDetail();
       this.getAuthor(this.authorInfo.author_id);
-      this.getBtnType();
     },
     methods: {
       init() {
-        console.log(this.$route.query);
         this.authorInfo.author_id = this.$route.query.author_id;
         this.articleInfo.article_id = this.$route.query.article_id;
+        this.getAttentionInfo(1, 10);
       },
       getDetail() {
         this.$api.article.articleDetail(this.authorInfo.author_id, this.articleInfo.article_id).then(res => {
@@ -104,17 +103,6 @@
           this.articleInfo.content = res.data.content;
           this.articleInfo.create_time = res.data.create_time
         })
-        // axios.defaults.baseURL = '';
-        // const {data: res} = await axios.get(`articles/detail/${this.authorInfo.author_id}/${this.articleInfo.article_id}`);
-        // if (res.flag) {
-        //   this.authorInfo.author_name = res.data.author_name;
-        //   this.articleInfo.title = res.data.title;
-        //   this.articleInfo.content = res.data.content;
-        //   this.articleInfo.create_time = res.data.create_time
-        // }
-        // console.log(this.$http);
-        // this.$http.defaults.baseURL = '';
-        //await this.$http.get(`http:localhost:9003/article/detail/${this.user_id}/${this.article_id}`)
       },
       getAuthor(id) {
         this.$api.user.userInfo(id).then(res => {
@@ -123,18 +111,21 @@
 
         })
       },
-      attention() {
+      attentionHandle() {
         this.is_attention = !this.is_attention;
-        this.getBtnType();
-        if (this.is_attention === false) {
-          this.buttonInfo = "未关注"
-        } else {
-          this.buttonInfo = "已关注"
-        }
+        this.initBtn()
       },
-      getBtnType(){
-        this.btnType = this.is_attention === true ? 'success':'';
-      }
+      initBtn() {
+        this.btnType = this.is_attention === true ? 'success' : '';
+        this.buttonInfo = this.is_attention === false ? '未关注' : '已关注';
+      },
+      // 获取关注信息，判断是否关注
+      getAttentionInfo(userId, targetUserId) {
+        this.$api.user.attentionInfo(userId, targetUserId).then(res => {
+          this.is_attention = res.data !== null;
+          this.initBtn();
+        })
+      },
     }
   }
 </script>
@@ -186,5 +177,10 @@
   .text-content {
     margin-top: 20px;
     margin-left: 30px;
+    /*禁止字体超出*/
+    overflow: hidden;
+    /*实现字体过长自动换行*/
+    word-break: break-all;
+    word-wrap: break-word;
   }
 </style>

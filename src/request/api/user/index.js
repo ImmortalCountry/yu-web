@@ -7,5 +7,11 @@ const user = {
     const {data: res} = await axios.get(`${linkUrl.userUrl}/users/${id}`);
     return res
   },
+  // 关注信息
+  async attentionInfo(userId, targetUserId) {
+    const {data: res} = await axios.get(`${linkUrl.userUrl}/users/attention/${userId}/${targetUserId}`);
+    return res
+  },
+
 };
 export default user;

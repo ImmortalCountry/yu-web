@@ -6,6 +6,16 @@
           <el-col :span="100">
             <el-input v-model="Args.title" placeholder="请输入标题"></el-input>
           </el-col>
+          <el-col :span="6">
+            <el-select v-model="Args.channel_id" placeholder="文章类别">
+              <el-option
+                v-for="item in channelList"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id">
+              </el-option>
+            </el-select>
+          </el-col>
           <el-col :span="3">
             <el-button type="primary" @click="addArticle">发布</el-button>
           </el-col>
@@ -30,19 +40,28 @@
   export default {
     data() {
       return {
+        channelList: [],
         Args: {
           title: '',
           content: '',
-          author_id: '1'
+          author_id: '1',
+          channel_id: 1
         }
       }
     },
+    created() {
+      this.getChannelList()
+    },
     methods: {
       addArticle() {
-        console.log(this.Args);
         this.$api.article.articleSave(this.Args).then(res => {
-          console.log(res);
           this.$message.success("success")
+        })
+      },
+      getChannelList() {
+        // 获取所有模块
+        this.$api.article.channelList().then(res => {
+          this.channelList = res.data;
         })
       }
     }

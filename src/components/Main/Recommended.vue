@@ -7,7 +7,7 @@
         router
         active-text-color="#409EFF"
         mode="horizontal">
-        <el-menu-item :index="'/' + item.path" v-for="item in channelList" :key="item.id">
+        <el-menu-item :index="'/' + item.path" v-for="item in channelList" :key="item.id" @click="setChannelId(item.id)">
           <span>{{item.name}}</span>
         </el-menu-item>
       </el-menu>
@@ -40,6 +40,9 @@
           this.channelList = res.data;
         })
       },
+      setChannelId(id){
+        this.$store.dispatch("setChannelId", id);
+      }
       // 保存高亮的路径
       // saveNavState(activePath){
       //   window.sessionStorage.setItem('activePath', activePath);
