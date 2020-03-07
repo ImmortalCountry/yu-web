@@ -4,7 +4,8 @@
 const linkUrl = {
   articleUrl: '/article',
   baseUrl: '/base',
-  userUrl: '/user'
+  userUrl: '/user',
+  gatheringUrl: '/gathering'
 };
 
 export default linkUrl;

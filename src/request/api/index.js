@@ -2,6 +2,7 @@
 import article from '@/request/api/article';
 import base from '@/request/api/base';
 import user from '@/request/api/user'
+import gathering from '@/request/api/gathering'
 
 // 其他模块的接口……
 /**
@@ -11,6 +12,7 @@ import user from '@/request/api/user'
 export default {
   article,
   base,
-  user
+  user,
+  gathering
   // ……
 }
