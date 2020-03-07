@@ -41,7 +41,8 @@
             </el-badge>
           </div>
           <div class="button" v-if="!isLogin">
-            <el-button type="primary" size="small" round style="height: 100%">注册</el-button>
+            <el-button type="primary" size="small" round style="height: 100%" @click="registerDialogVisible = true">注册
+            </el-button>
           </div>
           <div class="button" v-if="!isLogin">
             <el-button type="primary" size="small" round style="height: 100%" @click="loginDialogVisible = true">登录
@@ -76,11 +77,11 @@
       <!--      内容主题区域-->
 
       <el-form ref="addFormRef" :model="loginForm" label-width="70px">
-        <el-form-item label="用户名">
+        <el-form-item label="手机号">
           <el-input v-model="loginForm.mobile"></el-input>
         </el-form-item>
         <el-form-item label="密码">
-          <el-input v-model="loginForm.password"></el-input>
+          <el-input type="password" v-model="loginForm.password"></el-input>
         </el-form-item>
       </el-form>
 
@@ -88,6 +89,35 @@
       <span slot="footer" class="dialog-footer">
         <el-button @click="loginDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="login">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    <!--注册-->
+
+    <el-dialog
+      @close="registerDialogClosed"
+      title="注册"
+      :visible.sync="registerDialogVisible"
+      width="50%">
+      <!--      内容主题区域-->
+
+      <el-form ref="addFormRef" :model="registerForm" label-width="70px">
+        <el-form-item label="手机号">
+          <el-input v-model="registerForm.mobile"></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input type="password" v-model="registerForm.password"></el-input>
+        </el-form-item>
+        <el-form-item label="验证码">
+          <el-input v-model="registerForm.code"></el-input>
+        </el-form-item>
+        <el-button :disabled="isDisabled" @click="sendSms">{{smsInfo}}</el-button>
+      </el-form>
+
+      <!--      底部区域-->
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="registerDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="register">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -103,8 +133,16 @@
         activePath: '',
         isLogin: null,
         loginDialogVisible: false,
+        registerDialogVisible: false,
+        isDisabled: false,
+        smsInfo: "发送短信验证码",
         loginForm: {
           mobile: '',
+          password: ''
+        },
+        registerForm: {
+          mobile: '',
+          code: '',
           password: ''
         },
         user: null
@@ -148,6 +186,31 @@
       addDialogClosed() {
         this.loginForm.mobile = '';
         this.loginForm.password = '';
+      },
+      // 注册
+      registerDialogClosed() {
+        this.registerForm.mobile = '';
+        this.registerForm.password = '';
+        this.registerForm.sms = '';
+        this.smsInfo = "发送短信验证码";
+        this.isDisabled = false;
+      },
+      register() {
+        this.$api.user.register(this.registerForm).then(res => {
+          if (res.flag === true) {
+            this.registerDialogVisible = false;
+            this.smsInfo = "发送短信验证码";
+            this.isDisabled = false;
+            this.$message.success("注册成功");
+            this.$router.go(0)
+          } else {
+            this.$message.success(res.message);
+          }
+        })
+      },
+      sendSms() {
+        this.isDisabled = true;
+        this.smsInfo = "已发送";
       },
       login() {
         this.$api.user.login(this.loginForm).then(res => {

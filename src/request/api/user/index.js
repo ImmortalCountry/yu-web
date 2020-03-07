@@ -17,6 +17,10 @@ const user = {
     const {data: res} = await axios.post(`${linkUrl.userUrl}/users/login`, loginForm);
     return res
   },
-
+  // 注册
+  async register(registerForm) {
+    const {data: res} = await axios.post(`${linkUrl.userUrl}/users/register`, registerForm);
+    return res
+  },
 };
 export default user;
