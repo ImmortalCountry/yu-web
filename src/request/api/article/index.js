@@ -10,8 +10,8 @@ const article = {
     const {data: res} = await axios.get(`${linkUrl.articleUrl}/channels`);
     return res
   },
-  async articleDetail(authorId, articleId) {
-    const {data: res} = await axios.get(`${linkUrl.articleUrl}/articles/detail/${authorId}/${articleId}`);
+  async articleDetail(articleId) {
+    const {data: res} = await axios.get(`${linkUrl.articleUrl}/articles/detail/${articleId}`);
     return res
   },
   async articleSave(Args) {

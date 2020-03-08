@@ -21,11 +21,13 @@
                 </el-col>
                 <el-col :span="15">
                   <el-row :gutter="20" style="margin-top: 23px"><span>{{authorInfo.author_name}}</span></el-row>
-                  <el-row :gutter="20" style="margin-top: 10px"><span>{{this.$commonUtils.timeTrans(articleInfo.create_time)}}</span></el-row>
+                  <el-row :gutter="20" style="margin-top: 10px"><span>{{this.$commonUtils.timeTrans(articleInfo.create_time)}}</span>
+                  </el-row>
                 </el-col>
 
                 <el-col :span="3">
-                  <el-button :type=btnType size="medium" style="margin-top: 28px" @click="attentionHandle"
+                  <el-button v-if="isShowBtn" :type=btnType size="medium" style="margin-top: 28px"
+                             @click="attentionHandle"
                              v-text=buttonInfo>
                   </el-button>
                 </el-col>
@@ -82,35 +84,45 @@
         },
         is_attention: 'false',
         buttonInfo: '未关注',
-        btnType: ''
+        btnType: '',
+        isShowBtn: false
       }
     },
     created() {
       this.init();
       this.getDetail();
-      this.getAuthor(this.authorInfo.author_id);
     },
     methods: {
       init() {
         this.authorInfo.author_id = this.$route.query.author_id;
+        console.log(this.authorInfo.author_id)
         this.articleInfo.article_id = this.$route.query.article_id;
-        this.getAttentionInfo(1, 10);
+        let user = this.$sessionUtils.getUserInfo();
+        // 用户不是本文章的作者
+        if (user !== null && user.id !== this.authorInfo.author_id) {
+          this.isShowBtn = true;
+        }
+        this.getAttentionInfo(user.id, this.authorInfo.author_id);
       },
       getDetail() {
-        this.$api.article.articleDetail(this.authorInfo.author_id, this.articleInfo.article_id).then(res => {
+        this.$api.article.articleDetail(this.articleInfo.article_id).then(res => {
+          this.authorInfo.author_id = res.data.author_id;
           this.authorInfo.author_name = res.data.author_name;
           this.articleInfo.title = res.data.title;
           this.articleInfo.content = res.data.content;
-          this.articleInfo.create_time = res.data.create_time
+          this.articleInfo.create_time = res.data.create_time;
+          this.setAuthorInfo(this.authorInfo.author_id);
         })
       },
-      getAuthor(id) {
+      setAuthorInfo(id) {
         this.$api.user.userInfo(id).then(res => {
           this.authorInfo.author_name = res.data.nick_name;
           this.authorInfo.author_id = res.data.id;
         })
       },
       attentionHandle() {
+
+
         this.is_attention = !this.is_attention;
         this.initBtn()
       },
@@ -121,7 +133,7 @@
       // 获取关注信息，判断是否关注
       getAttentionInfo(userId, targetUserId) {
         this.$api.user.attentionInfo(userId, targetUserId).then(res => {
-          this.is_attention = res.data !== null;
+          this.is_attention = res.flag;
           this.initBtn();
         })
       },
