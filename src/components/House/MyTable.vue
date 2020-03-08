@@ -3,7 +3,7 @@
     <el-row :gutter="20">
       <el-col :span="3"><span class="text-header">手机号</span></el-col>
       <el-col :span="6">
-        <el-input disabled v-model="userInfo.mobile"></el-input>
+        <el-input disabled v-text="userInfo.mobile"></el-input>
       </el-col>
 
     </el-row>
@@ -43,7 +43,7 @@
     <el-row :gutter="20">
       <el-col :span="3" class="text-header">上次登录时间</el-col>
       <el-col :span="6">
-        <el-input disabled v-model="userInfo.lastLoginTime"></el-input>
+        <el-input disabled v-text="this.$commonUtils.timeTrans(userInfo.lastLoginTime)"></el-input>
       </el-col>
     </el-row>
 
@@ -77,22 +77,23 @@
     },
     created() {
       let user = JSON.parse(window.sessionStorage.getItem("user"));
-      console.log(user.id);
       this.$api.user.userInfo(user.id).then(res => {
         if (res.flag) {
           this.userInfo = res.data;
-          this.userInfo.lastLoginTime = this.$commonUtils.timeTrans(res.data.lastLoginTime)
         }
       });
     },
     methods: {
       update() {
         this.$api.user.update(this.userInfo).then(res => {
-          if (res.flag){
+          if (res.flag) {
             this.$message.success(res.message);
-            this.$router.go(0);
+            // setTimeout(this.refresh(), 10000); //延迟1s后再操作sleep()函数
           }
         })
+      },
+      refresh() {
+        this.$router.go(0);
       }
     }
   }

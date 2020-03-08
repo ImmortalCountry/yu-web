@@ -31,6 +31,11 @@ const user = {
   async update(userInfo) {
     const {data: res} = await axios.put(`${linkUrl.userUrl}/users/${userInfo.id}`, userInfo);
     return res
+  },
+  //修改关注状态
+  async attention(userId, targetUserId, amount){
+    const {data: res} = await axios.put(`${linkUrl.userUrl}/users/attention/${userId}/${targetUserId}/${amount}`);
+        return res
   }
 };
 export default user;

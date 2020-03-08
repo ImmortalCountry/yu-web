@@ -85,7 +85,8 @@
         is_attention: 'false',
         buttonInfo: '未关注',
         btnType: '',
-        isShowBtn: false
+        isShowBtn: false,
+        user_id: '',
       }
     },
     created() {
@@ -101,6 +102,7 @@
         // 用户不是本文章的作者
         if (user !== null && user.id !== this.authorInfo.author_id) {
           this.isShowBtn = true;
+          this.user_id = user.id;
         }
         this.getAttentionInfo(user.id, this.authorInfo.author_id);
       },
@@ -121,8 +123,13 @@
         })
       },
       attentionHandle() {
-
-
+        // 如果关注了就取消关注
+        if (this.is_attention === true) {
+          this.$api.user.attention(this.user_id, this.authorInfo.author_id, "-1");
+        } else {
+          // 关注
+          this.$api.user.attention(this.user_id, this.authorInfo.author_id, "1");
+        }
         this.is_attention = !this.is_attention;
         this.initBtn()
       },

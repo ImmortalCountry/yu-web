@@ -1,23 +1,26 @@
 <template>
-  <el-container class="home">
-    <!--    头-->
-    <el-header>
-      <el-menu
-        router
-        style="margin-left: 30%"
-        active-text-color="#409EFF"
-        mode="horizontal">
-        <el-menu-item :index="'/user/house/' + item.path" v-for="item in routerList" :key="item.id">
-          <span>{{item.name}}</span>
-        </el-menu-item>
-      </el-menu>
-    </el-header>
-    <el-main class="main">
-      <div class="main-div">
-        <router-view></router-view>
-      </div>
-    </el-main>
-  </el-container>
+  <div>
+    <Header/>
+    <el-container class="home">
+      <!--    头-->
+      <el-header>
+        <el-menu
+          router
+          style="margin-left: 30%"
+          active-text-color="#409EFF"
+          mode="horizontal">
+          <el-menu-item :index="'/user/house/' + item.path" v-for="item in routerList" :key="item.id">
+            <span>{{item.name}}</span>
+          </el-menu-item>
+        </el-menu>
+      </el-header>
+      <el-main class="main">
+        <div class="main-div">
+          <router-view></router-view>
+        </div>
+      </el-main>
+    </el-container>
+  </div>
 </template>
 
 <script>
@@ -39,6 +42,9 @@
           }
         ]
       }
+    },
+    components: {
+      Header: require('../common/Header.vue').default
     }
   }
 </script>
