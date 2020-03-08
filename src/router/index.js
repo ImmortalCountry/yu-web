@@ -21,10 +21,6 @@ export default new Router({
   base: '',
   routes: [
     {
-      path: '/welcome/article/write',
-      redirect: '/article/write',
-    },
-    {
       path: '/article/write',
       component: WriteArticle
     },
@@ -74,13 +70,5 @@ export default new Router({
       path: '/user/house',
       component: House
     },
-    {
-      path: '**/article/write',
-      redirect: "/article/write"
-    },
-    {
-      path: '**/user/friend',
-      redirect: "/user/friend"
-    }
   ]
 })

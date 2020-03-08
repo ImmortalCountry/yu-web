@@ -177,7 +177,9 @@
           this.$message.success("请先登录");
           this.loginDialogVisible = true;
         } else {
-          this.$router.push('article/write')
+          // this.$router.push('article/write')
+          this.$router.push({path:'/article/write'});
+
         }
       },
       addDialogClosed() {
@@ -232,7 +234,8 @@
       },
       // 去个人中心
       toMyHouse() {
-        this.$router.push('user/house')
+        // this.$router.push('user/house')
+        this.$router.push({path:'/user/house'})
       }
     }
   }
