@@ -21,7 +21,7 @@
                 </el-col>
                 <el-col :span="15">
                   <el-row :gutter="20" style="margin-top: 23px"><span>{{authorInfo.author_name}}</span></el-row>
-                  <el-row :gutter="20" style="margin-top: 10px"><span>{{articleInfo.create_time}}</span></el-row>
+                  <el-row :gutter="20" style="margin-top: 10px"><span>{{this.$commonUtils.timeTrans(articleInfo.create_time)}}</span></el-row>
                 </el-col>
 
                 <el-col :span="3">

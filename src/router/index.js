@@ -9,8 +9,12 @@ import Spit from "../components/Main/Spit";
 import Recruit from "../components/Main/Recruit";
 import Article from "../components/Article/Article";
 import ArticleDetail from "../components/Article/ArticleDetail";
-import WriteArticle from "../components/Article/WriteArticle"
-import House from "../components/Main/House"
+import WriteArticle from "../components/Article/WriteArticle";
+import House from "../components/House/House";
+import Fans from "../components/House/Fans";
+import Follow from "../components/House/Follow";
+import MyTable from "../components/House/MyTable";
+
 Vue.use(Router);
 const routerPush = Router.prototype.push;
 Router.prototype.push = function push(location) {
@@ -68,7 +72,22 @@ export default new Router({
     },
     {
       path: '/user/house',
-      component: House
+      component: House,
+      redirect: '/user/house/fans',
+      children:[
+        {
+          path:'/user/house/fans',
+          component: Fans
+        },
+        {
+          path:'/user/house/follow',
+          component: Follow
+        },
+        {
+          path:'/user/house/myself',
+          component: MyTable
+        }
+      ]
     },
   ]
 })

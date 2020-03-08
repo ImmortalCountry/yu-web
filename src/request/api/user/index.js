@@ -22,5 +22,15 @@ const user = {
     const {data: res} = await axios.post(`${linkUrl.userUrl}/users/register`, registerForm);
     return res
   },
+  // 获取用户详细信息
+  async getUserDetailInfo(args) {
+    const {data: res} = await axios.post(`${linkUrl.userUrl}/users/detail`, args);
+    return res
+  },
+  // 更新用户信息
+  async update(userInfo) {
+    const {data: res} = await axios.put(`${linkUrl.userUrl}/users/${userInfo.id}`, userInfo);
+    return res
+  }
 };
 export default user;

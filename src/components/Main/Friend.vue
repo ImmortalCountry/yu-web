@@ -56,7 +56,6 @@
     height: 20px;
     margin-left: 200px;
     margin-top: 25px;
-
   }
 </style>
 

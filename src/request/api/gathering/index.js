@@ -3,7 +3,7 @@ import axios from '@/request/http.js';
 
 const gathering = {
 async gatheringList() {
-    const {data: res} = await axios.get(`${linkUrl.gatheringUrl}/gatherings`);
+    const {data: res} = await axios.get(`${linkUrl.gatheringUrl}/gatherings/list`);
     return res
   },
 }

@@ -8,9 +8,12 @@ import 'element-ui/lib/theme-chalk/index.css';
 import '@/style/global.css'
 import api from '@/request/api'
 import store from './store/store.js';
-import userUtils from '@/utils/login.js'
+import loginUtils from '@/utils/login.js'
+import commonUtils from '@/utils/commonUtils.js'
 
-Vue.prototype.$api = api
+
+Vue.prototype.$api = api;
+Vue.prototype.$commonUtils = commonUtils;
 
 Vue.use(ElementUI);
 
@@ -22,7 +25,6 @@ new Vue({
   el: '#app',
   router,
   store,
-  userUtils,
   components: {App},
   template: '<App/>'
 })
