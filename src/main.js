@@ -10,10 +10,12 @@ import api from '@/request/api'
 import store from './store/store.js';
 import loginUtils from '@/utils/login.js'
 import commonUtils from '@/utils/commonUtils.js'
+import SessionUtils from '@/utils/SessionUtils.js'
 
 
 Vue.prototype.$api = api;
 Vue.prototype.$commonUtils = commonUtils;
+Vue.prototype.$sessionUtils = SessionUtils;
 
 Vue.use(ElementUI);
 

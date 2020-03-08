@@ -108,7 +108,6 @@
         this.$api.user.userInfo(id).then(res => {
           this.authorInfo.author_name = res.data.nick_name;
           this.authorInfo.author_id = res.data.id;
-
         })
       },
       attentionHandle() {

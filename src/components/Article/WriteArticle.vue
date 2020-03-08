@@ -4,10 +4,10 @@
       <div class="header">
         <el-row :gutter="20">
           <el-col :span="100">
-            <el-input v-model="Args.title" placeholder="请输入标题"></el-input>
+            <el-input v-model="args.title" placeholder="请输入标题"></el-input>
           </el-col>
           <el-col :span="6">
-            <el-select v-model="Args.channel_id" placeholder="文章类别">
+            <el-select v-model="args.channel_id" placeholder="文章类别">
               <el-option
                 v-for="item in channelList"
                 :key="item.id"
@@ -27,7 +27,7 @@
       <div class="textContent">
         <el-input
           type="textarea"
-          v-model="Args.content"
+          v-model="args.content"
           :rows="30"
           placeholder="请输入内容">
         </el-input>
@@ -41,11 +41,11 @@
     data() {
       return {
         channelList: [],
-        Args: {
+        args: {
           title: '',
           content: '',
-          author_id: '1',
-          channel_id: 1
+          author_id: '',
+          channel_id: 1,
         }
       }
     },
@@ -53,15 +53,29 @@
       this.getChannelList()
     },
     methods: {
+      refreshDetail(article_id) {
+        this.$router.push({path: '/article/detail', query: {author_id: this.args.author_id, article_id: article_id}})
+      },
       addArticle() {
-        if (window.sessionStorage.getItem("user") !== null || window.sessionStorage.getItem("user") !== "") {
-          let user = JSON.parse(window.sessionStorage.getItem("user"))
-          this.Args.author_id = user.id;
+        // if (window.sessionStorage.getItem("user") !== null || window.sessionStorage.getItem("user") !== "") {
+        //   let user = JSON.parse(window.sessionStorage.getItem("user"));
+        //   this.args.author_id = user.id;
+        // }
+        let user = this.$sessionUtils.getUserInfo();
+        if (user !== null){
+          this.args.author_id = user.id;
         }
-        this.$api.article.articleSave(this.Args).then(res => {
-          this.$message.success("success")
+        console.log(this.args.author_id)
+        this.$api.article.articleSave(this.args).then(res => {
+          if (res.flag){
+            this.$message.success(res.message);
+            console.log(res)
+            console.log(res.data.id)
+            this.refreshDetail(res.data)
+          }else {
+            this.$message.error(res.message)
+          }
         });
-        this.$router.go(0)
       },
       getChannelList() {
         // 获取所有模块
