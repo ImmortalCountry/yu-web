@@ -47,9 +47,8 @@
                   <b>{{articleInfo.title}}</b>
                 </div>
                 <!--                主题内容-->
-                <div class="text-content" id="insert">sss</div>
+                <div class="text-content" id="insert">文章加载中...</div>
               </div>
-
 
             </div>
           </el-col>
@@ -98,8 +97,6 @@
           }
         }, 1000)
       })
-
-
     },
     methods: {
       getContent() {

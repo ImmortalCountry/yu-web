@@ -23,8 +23,8 @@
                 </el-row>
 
                 <el-row style="cursor: pointer" @click.native="goDetail(item.id)">
-                  <el-col style="width: 100%">
-                    {{item.content}}
+                  <el-col style="width: 100%;  word-break: break-all;word-wrap: break-word;">
+                    {{item.description}}
                   </el-col>
 
                 </el-row>
@@ -32,13 +32,12 @@
                   <el-col>分享</el-col>
 
                 </el-row>
-
-
               </div>
             </el-col>
             <el-col :span="6" style="background-color: blue">
-              <div class="grid-content bg-purple" style="height: 150px">2
-                <div>2222222222222222</div>
+              <div class="grid-content bg-purple" style="height: 150px">
+                <el-image v-if="item.url !==  null" style="width: 100%; height: 100%" :src="item.url"
+                          fit="contain"></el-image>
               </div>
             </el-col>
           </el-row>
