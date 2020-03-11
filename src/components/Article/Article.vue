@@ -4,10 +4,10 @@
 
       <!--      左侧列-->
       <el-col :span="18" style="height: 100%">
-        <div class="grid-content bg-purple" style="background-color: #5daf34; height: 100%"
+        <div class="grid-content bg-purple" style="height: 100%"
              v-infinite-scroll="load"
              infinite-scroll-disabled="disabled">
-          <el-row v-for="item in articleList" :key="item.id">
+          <el-row style="margin-top: 2px"v-for="item in articleList" :key="item.id">
             <el-col :span="18" style="background-color: #409eff">
               <div class="grid-content bg-purple" style="height: 150px">
                 <el-row>
