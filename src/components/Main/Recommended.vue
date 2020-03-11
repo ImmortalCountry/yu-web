@@ -1,8 +1,9 @@
 <template>
-  <el-container class="home">
+  <el-container class="recommended-container-home">
     <!--    头-->
     <el-header>
       <el-menu
+        style="margin-left: 40%"
         default-active="activePath"
         router
         active-text-color="#409EFF"
@@ -56,14 +57,16 @@
 <style scoped lang="scss">
   .main {
     height: 100%;
-    background-color: #ffffff;
+    background-color:#f4f5f5;
   }
-
   .main-div {
     margin-left: 20%;
-    margin-right: 20%;
     background-color: #ffffff;
     height: 100%;
+  }
+  .recommended-container-home{
+    margin-top: -20px;
+    width: 100%;
   }
 
 </style>

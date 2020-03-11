@@ -1,18 +1,18 @@
 <template>
   <div>
     <el-row :gutter="20">
-      <el-col :span="6">
+      <el-col :span="4">
         <div class="logo">
           <img src="./assets/logo.png" height="50" width="50" alt="logo">
         </div>
       </el-col>
-      <el-col :span="6">
+      <el-col :span="8" style="height: 57px">
         <div class="module">
           <el-menu
             default-active="activePath"
             router
             active-text-color="#409EFF"
-            mode="horizontal">
+            mode="horizontal" style="height: 100%">
             <el-menu-item :index="'/' + item.path" v-for="item in moduleList" :key="item.id"
                           @click="saveNavState('/' + item.path)">
               <span>{{item.module_name}}</span>
@@ -28,7 +28,7 @@
           </el-input>
         </div>
       </el-col>
-      <el-col :span="4">
+      <el-col :span="6">
         <div class="input">
           <div class="button">
             <el-button type="primary" round size="small" style="height: 100%" @click="writeArticle">写文章</el-button>
@@ -178,7 +178,7 @@
           this.loginDialogVisible = true;
         } else {
           // this.$router.push('article/write')
-          this.$router.push({path:'/article/write'});
+          this.$router.push({path: '/article/write'});
 
         }
       },
@@ -235,7 +235,7 @@
       // 去个人中心
       toMyHouse() {
         // this.$router.push('user/house')
-        this.$router.push({path:'/user/house'})
+        this.$router.push({path: '/user/house'})
       }
     }
   }
@@ -251,6 +251,10 @@
     float: left;
     margin-left: 10px;
     margin-bottom: 2px;
+  }
+
+  .module {
+    height: 57px;
   }
 
   img {

@@ -4,10 +4,8 @@
     <el-header>
       <Header></Header>
     </el-header>
-    <el-main class="main">
-      <div class="main-div">
+    <el-main class="main-container">
         <router-view></router-view>
-      </div>
     </el-main>
   </el-container>
 
@@ -28,13 +26,10 @@
     background-color: #eeeeee;
     height: 100%;
   }
-  .main-div {
-    margin-left: 20%;
-    margin-right: 20%;
+  .main-container{
     height: 100%;
-  }
-  .main{
-    height: 100%;
+    width: 100%;
+    padding: 0px;
   }
 
 </style>
