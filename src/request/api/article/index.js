@@ -12,7 +12,7 @@ const article = {
     const {data: res} = await axios.get(`${linkUrl.articleUrl}/channels`);
     return res
   },
-  async articleDetail(articleId) {
+  async getArticleDetail(articleId) {
     const {data: res} = await axios.get(`${linkUrl.articleUrl}/articles/detail/${articleId}`);
     return res
   },

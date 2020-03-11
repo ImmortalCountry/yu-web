@@ -15,14 +15,14 @@
                   <el-col :span="10" style="background-color: #cf9236">时间</el-col>
                 </el-row>
 
-                <el-row style="cursor: pointer" @click.native="goDetail(item.userId, item.id)">
+                <el-row style="cursor: pointer" @click.native="goDetail(item.id)">
                   <el-col style="width: 100%; background-color: #8c939d;">
                     <el-link><b style="color: black; font-size: medium">{{item.title}}</b></el-link>
                   </el-col>
 
                 </el-row>
 
-                <el-row style="cursor: pointer" @click.native="goDetail(item.userId, item.id)">
+                <el-row style="cursor: pointer" @click.native="goDetail(item.id)">
                   <el-col style="width: 100%">
                     {{item.content}}
                   </el-col>
@@ -192,11 +192,10 @@
       },
 
 
-      goDetail(author_id, article_id) {
+      goDetail(article_id) {
         let routeData = this.$router.resolve({
           path: "/article/detail",
           query: {
-            author_id: author_id,
             article_id: article_id
           }
         });

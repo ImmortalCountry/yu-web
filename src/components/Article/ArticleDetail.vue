@@ -20,8 +20,8 @@
                   </div>
                 </el-col>
                 <el-col :span="15">
-                  <el-row :gutter="20" style="margin-top: 23px"><span>{{authorInfo.author_name}}</span></el-row>
-                  <el-row :gutter="20" style="margin-top: 10px"><span>{{this.$commonUtils.timeTrans(articleInfo.create_time)}}</span>
+                  <el-row :gutter="20" style="margin-top: 23px"><span>{{articleInfo.authorInfo.nickName}}</span></el-row>
+                  <el-row :gutter="20" style="margin-top: 10px"><span>{{this.$commonUtils.timeTrans(articleInfo.createTime)}}</span>
                   </el-row>
                 </el-col>
 
@@ -71,22 +71,14 @@
     },
     data() {
       return {
-        articleInfo: {
-          article_id: '',
-          content: '',
-          title: '',
-          img_url: '',
-          create_time: ''
-        },
-        authorInfo: {
-          author_id: '',
-          author_name: ''
-        },
-        is_attention: 'false',
+        articleInfo: '',
+        // 用户是否关注了作者
+        isAttention: 'false',
         buttonInfo: '未关注',
         btnType: '',
         isShowBtn: false,
-        user_id: '',
+        userId: '',
+        authorId: ''
       }
     },
     created() {
@@ -95,52 +87,41 @@
     },
     methods: {
       init() {
-        this.authorInfo.author_id = this.$route.query.author_id;
-        console.log(this.authorInfo.author_id)
-        this.articleInfo.article_id = this.$route.query.article_id;
+        this.authorId = this.$route.query.article_id;
         let user = this.$sessionUtils.getUserInfo();
         // 用户不是本文章的作者
-        if (user !== null && user.id !== this.authorInfo.author_id) {
+        if (user !== null && user.id !== this.authorId) {
           this.isShowBtn = true;
-          this.user_id = user.id;
+          this.userId = user.id;
         }
-        this.getAttentionInfo(user.id, this.authorInfo.author_id);
+        this.getAttentionInfo(user.id, this.authorId);
       },
       getDetail() {
-        this.$api.article.articleDetail(this.articleInfo.article_id).then(res => {
-          this.authorInfo.author_id = res.data.author_id;
-          this.authorInfo.author_name = res.data.author_name;
-          this.articleInfo.title = res.data.title;
-          this.articleInfo.content = res.data.content;
-          this.articleInfo.create_time = res.data.create_time;
-          this.setAuthorInfo(this.authorInfo.author_id);
-        })
-      },
-      setAuthorInfo(id) {
-        this.$api.user.userInfo(id).then(res => {
-          this.authorInfo.author_name = res.data.nick_name;
-          this.authorInfo.author_id = res.data.id;
+        this.$api.article.getArticleDetail(this.authorId).then(res => {
+          this.articleInfo = res.data;
+          // console.log(this.articleInfo)
+          console.log()
         })
       },
       attentionHandle() {
         // 如果关注了就取消关注
-        if (this.is_attention === true) {
-          this.$api.user.attention(this.user_id, this.authorInfo.author_id, "-1");
+        if (this.isAttention === true) {
+          this.$api.user.attention(this.userId, this.AuthorId, "-1");
         } else {
           // 关注
-          this.$api.user.attention(this.user_id, this.authorInfo.author_id, "1");
+          this.$api.user.attention(this.userId, this.AuthorId, "1");
         }
-        this.is_attention = !this.is_attention;
+        this.isAttention = !this.isAttention;
         this.initBtn()
       },
       initBtn() {
-        this.btnType = this.is_attention === true ? 'success' : '';
-        this.buttonInfo = this.is_attention === false ? '未关注' : '已关注';
+        this.btnType = this.isAttention === true ? 'success' : '';
+        this.buttonInfo = this.isAttention === false ? '未关注' : '已关注';
       },
       // 获取关注信息，判断是否关注
       getAttentionInfo(userId, targetUserId) {
         this.$api.user.attentionInfo(userId, targetUserId).then(res => {
-          this.is_attention = res.flag;
+          this.isAttention = res.flag;
           this.initBtn();
         })
       },
