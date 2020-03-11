@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="div-friend">
     <div style="width: 1000px;">
       <img src="../../assets/page-banner.png">
     </div>
@@ -43,8 +43,9 @@
     height: 200px;
   }
 
-  .home {
+  .div-friend {
     height: 100%;
+    margin-left: 17%;
   }
 
   .text {

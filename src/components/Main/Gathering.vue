@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="div-gathering">
     <div class="content">
       <el-row :gutter="20">
         <el-col :span="8" v-for="item in gatheringList" :key="item.id">
@@ -40,9 +40,10 @@
 </script>
 
 <style scoped lang="scss">
-  .home {
+  .div-gathering {
     margin-top: 20px;
     width: 1000px;
+    margin-left: 17%;
   }
 
   .box-card {

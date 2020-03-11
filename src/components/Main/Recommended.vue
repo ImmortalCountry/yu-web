@@ -15,9 +15,7 @@
       </el-menu>
     </el-header>
     <el-main class="main">
-      <div class="main-div">
-        <router-view></router-view>
-      </div>
+      <router-view></router-view>
     </el-main>
   </el-container>
 </template>
@@ -57,19 +55,14 @@
 
 <style scoped lang="scss">
   .main {
-    height: 100%;
-    background-color: #f4f5f5;
+
   }
 
-  .main-div {
-    margin-left: 17%;
-    background-color: #ffffff;
-    height: 100%;
-  }
 
   .recommended-container-home {
     margin-top: -20px;
     width: 100%;
+    height: 100%;
   }
 
 </style>

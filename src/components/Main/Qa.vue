@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="div-qa">
     <div class="content" v-for="item in 40" :key="item">
       <el-card class="box-card">
         <el-row :gutter="20">
@@ -69,8 +69,9 @@
     margin-left: 60px;
   }
 
-  .home {
+  .div-qa {
     height: 100%;
+    margin-left: 17%;
   }
 
   .textContainer {

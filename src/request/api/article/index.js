@@ -1,9 +1,11 @@
 import linkUrl from '@/request/api/linkUrl.js'; // 导入接口域名列表
 import axios from '@/request/http.js'; // 导入http中创建的axios实例
+
+
 const article = {
-  // 新闻列表
-  async articleList(page, size, searchMap) {
-    const {data: res} = await axios.post(`${linkUrl.articleUrl}/articles/${page}/${size}`, searchMap);
+  // 获取文章列表
+  async getArticleList(channelId, page, size) {
+    const {data: res} = await axios.get(`${linkUrl.articleUrl}/articles/${channelId}/${page}/${size}`);
     return res
   },
   async channelList() {
