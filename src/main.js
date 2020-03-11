@@ -12,6 +12,16 @@ import loginUtils from '@/utils/login.js'
 import commonUtils from '@/utils/commonUtils.js'
 import SessionUtils from '@/utils/SessionUtils.js'
 
+// 引入
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
+Vue.use(VueQuillEditor)
+
+
+
 
 Vue.prototype.$api = api;
 Vue.prototype.$commonUtils = commonUtils;

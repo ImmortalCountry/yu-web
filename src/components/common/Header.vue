@@ -9,7 +9,7 @@
       </el-col>
 
       <!--      module频道-->
-      <el-col :span="8" class="col-module">
+      <el-col :span="6" class="col-module">
         <el-menu
           default-active="activePath"
           router
