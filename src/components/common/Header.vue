@@ -1,25 +1,28 @@
 <template>
-  <div>
+  <div class="div-header">
     <el-row :gutter="20">
+      <!--      LOGO-->
       <el-col :span="4">
         <div class="logo">
           <img src="./assets/logo.png" height="50" width="50" alt="logo">
         </div>
       </el-col>
-      <el-col :span="8" style="height: 57px">
-        <div class="module">
-          <el-menu
-            default-active="activePath"
-            router
-            active-text-color="#409EFF"
-            mode="horizontal" style="height: 100%">
-            <el-menu-item :index="'/' + item.path" v-for="item in moduleList" :key="item.id"
-                          @click="saveNavState('/' + item.path)">
-              <span>{{item.module_name}}</span>
-            </el-menu-item>
-          </el-menu>
-        </div>
+
+      <!--      module频道-->
+      <el-col :span="8" class="col-module">
+        <el-menu
+          default-active="activePath"
+          router
+          active-text-color="#409EFF"
+          mode="horizontal" style="height: 100%;">
+          <el-menu-item :index="'/' + item.path" v-for="item in moduleList" :key="item.id"
+                        @click="saveNavState('/' + item.path)">
+            <span>{{item.module_name}}</span>
+          </el-menu-item>
+        </el-menu>
       </el-col>
+
+
       <!--搜索与添加区域-->
       <el-col :span="4">
         <div class="input">
@@ -260,6 +263,10 @@
   img {
     max-width: 100%;
     max-height: 100%;
+  }
+
+  .col-module {
+    height: 57px
   }
 
 </style>

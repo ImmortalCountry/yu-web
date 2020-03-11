@@ -3,12 +3,13 @@
     <!--    头-->
     <el-header>
       <el-menu
-        style="margin-left: 40%"
+        style="margin-left: 17%"
         default-active="activePath"
         router
         active-text-color="#409EFF"
         mode="horizontal">
-        <el-menu-item :index="'/' + item.path" v-for="item in channelList" :key="item.id" @click="setChannelId(item.id)">
+        <el-menu-item :index="'/' + item.path" v-for="item in channelList" :key="item.id"
+                      @click="setChannelId(item.id)">
           <span>{{item.name}}</span>
         </el-menu-item>
       </el-menu>
@@ -41,7 +42,7 @@
           this.channelList = res.data;
         })
       },
-      setChannelId(id){
+      setChannelId(id) {
         this.$store.dispatch("setChannelId", id);
       }
       // 保存高亮的路径
@@ -57,14 +58,16 @@
 <style scoped lang="scss">
   .main {
     height: 100%;
-    background-color:#f4f5f5;
+    background-color: #f4f5f5;
   }
+
   .main-div {
-    margin-left: 20%;
+    margin-left: 17%;
     background-color: #ffffff;
     height: 100%;
   }
-  .recommended-container-home{
+
+  .recommended-container-home {
     margin-top: -20px;
     width: 100%;
   }
