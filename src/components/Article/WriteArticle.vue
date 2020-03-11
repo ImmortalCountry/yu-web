@@ -25,18 +25,19 @@
           <el-row style="margin-top: 20px" :gutter="20">
             <el-col :span="6"><span style="margin-left: 50px"><b>封面图片</b></span></el-col>
             <el-col :span="3">
-              <input style="width: 200px;" v-model="headerUrl"></input>
+              <input style="width: 200px;" v-model="args.url"></input>
             </el-col>
           </el-row>
           <div style="margin-top: 30px; margin-left: 50px; width: 320px;height: 180px;">
-            <el-image style="width: 100%; height: 100%" :src="headerUrl" fit="contain"/>
+            <el-image style="width: 100%; height: 100%" :src="args.url" fit="contain"/>
           </div>
         </div>
       </el-header>
 
       <el-main>
         <div class="edit-box" style="display: flex;justify-content: center;">
-          <vue-edit style="width: 100%; height: 100%" ref="editor" id="editor" v-model="content" :menus="menus"></vue-edit>
+          <vue-edit style="width: 100%; height: 100%" ref="editor" id="editor" v-model="args.content"
+                    :menus="menus"></vue-edit>
         </div>
       </el-main>
     </el-container>
@@ -54,7 +55,6 @@
     },
     data() {
       return {
-        headerUrl: '',
         menus: [
           'source', // 源码模式
           '|',
@@ -93,6 +93,7 @@
         channelList: [],
         args: {
           title: '',
+          url: '',
           content: '',
           authorId: '',
           channelId: 1,
@@ -103,10 +104,6 @@
       this.getChannelList()
     },
     methods: {
-      getContent() {
-        this.initContent = this.$refs.editor.getHtml(this.initContent);
-        console.log(this.initContent, '获取编辑器当前内容的html代码片段')
-      },
       refreshDetail(article_id) {
         this.$router.push({path: '/article/detail', query: {authorId: this.args.authorId, article_id: article_id}})
       },
@@ -115,6 +112,9 @@
         if (user !== null) {
           this.args.authorId = user.id;
         }
+
+        // this.$refs.editor.setHtml(this.initContent) //如设置：后台返回来的固定内容
+        this.args.content = this.$refs.editor.getHtml(this.initContent);
         this.$api.article.articleSave(this.args).then(res => {
           if (res.flag) {
             this.$message.success(res.message);
@@ -129,6 +129,9 @@
         this.$api.article.channelList().then(res => {
           this.channelList = res.data;
         })
+      },
+      isDone(){
+
       }
     },
   }

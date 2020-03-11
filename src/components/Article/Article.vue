@@ -139,7 +139,7 @@
         this.articleList = [];
         this.count = 1;
         this.totalPages = '';
-        this.getArticleList();
+        this.getArticleList(this.channelId, this.count, 5);
       }
     },
     data() {

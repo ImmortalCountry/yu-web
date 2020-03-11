@@ -20,7 +20,8 @@
                   </div>
                 </el-col>
                 <el-col :span="15">
-                  <el-row :gutter="20" style="margin-top: 23px"><span>{{articleInfo.authorInfo.nickName}}</span></el-row>
+                  <el-row :gutter="20" style="margin-top: 23px"><span>{{this.articleInfo.authorInfo.nickName}}</span>
+                  </el-row>
                   <el-row :gutter="20" style="margin-top: 10px"><span>{{this.$commonUtils.timeTrans(articleInfo.createTime)}}</span>
                   </el-row>
                 </el-col>
@@ -46,9 +47,7 @@
                   <b>{{articleInfo.title}}</b>
                 </div>
                 <!--                主题内容-->
-                <div class="text-content">
-                  <span>{{articleInfo.content}}</span>
-                </div>
+                <div class="text-content" id="insert">sss</div>
               </div>
 
 
@@ -71,21 +70,45 @@
     },
     data() {
       return {
-        articleInfo: '',
+        done: '0',
+        articleInfo: {
+          authorInfo: ''
+        },
         // 用户是否关注了作者
         isAttention: 'false',
         buttonInfo: '未关注',
         btnType: '',
         isShowBtn: false,
         userId: '',
-        authorId: ''
+        authorId: '',
+        nickName: '',
       }
     },
     created() {
       this.init();
       this.getDetail();
+      // this.getContent()
+    },
+    mounted() {
+      this.$nextTick(() => {
+        setTimeout(() => {
+          let insertDiv = document.getElementById("insert");
+          if (insertDiv) {
+            insertDiv.innerHTML = this.articleInfo.content;
+          }
+        }, 1000)
+      })
+
+
     },
     methods: {
+      getContent() {
+        this.$nextTick(() => {
+          let insertDiv = document.getElementById("insert");
+          insertDiv.innerHTML = this.articleInfo.content;
+        })
+
+      },
       init() {
         this.authorId = this.$route.query.article_id;
         let user = this.$sessionUtils.getUserInfo();
@@ -99,8 +122,7 @@
       getDetail() {
         this.$api.article.getArticleDetail(this.authorId).then(res => {
           this.articleInfo = res.data;
-          // console.log(this.articleInfo)
-          console.log()
+          this.nickName = res.data.authorInfo.nickName
         })
       },
       attentionHandle() {
