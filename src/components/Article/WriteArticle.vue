@@ -36,7 +36,7 @@
 
       <el-main>
         <div class="edit-box" style="display: flex;justify-content: center;">
-          <vue-edit style="width: 100%; height: 100%" ref="editor" id="editor" v-model="args.content"
+          <vue-edit style="width: 100%; height: 100%; margin-left:100px" ref="editor" id="editor" v-model="args.content"
                     :menus="menus"></vue-edit>
         </div>
       </el-main>
@@ -155,7 +155,7 @@
     width: 700px;
     height: 500px;
     margin-top: 10px;
-    margin-left: 23%;
+    margin-left: 20%;
   }
 
 </style>
