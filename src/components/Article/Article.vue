@@ -12,7 +12,7 @@
               <div class="grid-content bg-purple" style="height: 150px">
                 <el-row>
                   <el-col :span="10" style="background-color: blue">作者</el-col>
-                  <el-col :span="10" style="background-color: #cf9236">时间</el-col>
+                  <el-col :span="10" style="background-color: #cf9236">{{item.createTime}}</el-col>
                 </el-row>
 
                 <el-row style="cursor: pointer" @click.native="goDetail(item.id)">
