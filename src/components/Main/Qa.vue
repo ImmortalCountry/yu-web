@@ -1,10 +1,15 @@
 <template>
   <div class="div-qa">
-    <div class="content" v-for="item in 40" :key="item">
+
+    <div style="width: 1000px; height: 60px; text-align: center; margin-left:60px; background-color: #13ce66">
+      <el-button style="margin-top: 10px" @click="openAddQuestion">发布问题</el-button>
+    </div>
+
+    <div class="content" v-for="item in questionList" :key="item.id">
       <el-card class="box-card">
         <el-row :gutter="20">
           <el-col :span="3">
-            <el-button style="color: #8cc5ff" class="textContainer">小明</el-button>
+            <el-button style="color: #8cc5ff" class="textContainer"></el-button>
           </el-col>
           <el-col :span="10">
             <el-button class="textContainer">回答于 2017-07-05 15:09</el-button>
@@ -12,7 +17,7 @@
         </el-row>
         <el-row :gutter="20">
           <el-col :span="13">
-            <el-button class="textContainer" @click="questionDetail">sundy为什么厉害！</el-button>
+            <el-button class="textContainer" @click="goDetail">{{item.title}}</el-button>
           </el-col>
         </el-row>
         <el-row :gutter="20">
@@ -28,10 +33,33 @@
           <el-col :span="2">
             <el-button style="margin-left:200px; width: 400px">浏览量 50 | 2017-07-05 15:09 来自 毕鹏</el-button>
           </el-col>
-
         </el-row>
       </el-card>
     </div>
+
+    <!--登录-->
+
+    <el-dialog
+      @close="addDialogClosed"
+      title="发布问题"
+      :visible.sync="qaDialogVisible"
+      width="40%">
+      <!--      内容主题区域-->
+      <el-form ref="addFormRef" :model="questionForm" label-width="70px">
+        <el-form-item label="标题">
+          <el-input v-model="questionForm.title"></el-input>
+        </el-form-item>
+        <el-form-item label="内容">
+          <el-input type="textarea" :autosize="{ minRows: 10, maxRows: 20}" v-model="questionForm.content"></el-input>
+        </el-form-item>
+      </el-form>
+
+      <!--      底部区域-->
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="qaDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addQuestion">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -39,17 +67,47 @@
   export default {
     data() {
       return {
-        questionList:[],
+        qaDialogVisible: false,
+        questionForm: {
+          title: '',
+          content: ''
+        },
+        questionList: [],
 
       }
     },
+    created() {
+      this.getQuestionList();
+    },
     methods: {
-      questionDetail() {
+      goDetail() {
+        console.log("进入详情页")
+      },
+      getQuestionList() {
+        this.$api.qa.getQuestionList().then(res => {
+          this.questionList = res.data;
+        })
+      },
+      // 添加问题
+      openAddQuestion() {
+        this.qaDialogVisible = true;
+      },
+      addQuestion() {
+        this.$api.qa.addQuestion(this.questionForm).then(res => {
+          if (res.flag) {
+            this.$message.success(res.message);
+            this.questionList = res.data;
+          } else {
+            this.$message.error(res.message);
+          }
+        });
+        this.qaDialogVisible = false;
 
       },
-      getQuestionList(){
-
-      }
+      addDialogClosed() {
+        this.questionForm.title = '';
+        this.questionForm.content = '';
+      },
     }
   }
 </script>

@@ -6,7 +6,8 @@ const linkUrl = {
   searchUrl: '/search',
   baseUrl: '/base',
   userUrl: '/user',
-  gatheringUrl: '/gathering'
+  gatheringUrl: '/gathering',
+  qaUrl: '/qa',
 };
 
 export default linkUrl;
