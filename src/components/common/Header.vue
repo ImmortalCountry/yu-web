@@ -26,8 +26,8 @@
       <!--搜索与添加区域-->
       <el-col :span="4">
         <div class="input">
-          <el-input placeholder="请输入内容">
-            <el-button slot="append" icon="el-icon-search"></el-button>
+          <el-input placeholder="请输入内容" v-model="key">
+            <el-button slot="append" icon="el-icon-search" @click="searchArticle"></el-button>
           </el-input>
         </div>
       </el-col>
@@ -128,6 +128,7 @@
   export default {
     data() {
       return {
+        key: '',
         icon_url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
         moduleList: [],
         activePath: '',
@@ -161,7 +162,6 @@
         }
 
         this.activePath = window.sessionStorage.getItem('activePath');
-        console.log(this.isLogin)
       },
       async getModuleList() {
         // 获取所有模块
@@ -239,6 +239,11 @@
       toMyHouse() {
         // this.$router.push('user/house')
         this.$router.push({path: '/user/house'})
+      },
+      //搜索文章
+      searchArticle() {
+        this.$router.push({path: '/search', query: {key: this.key}});
+        this.$router.go(0);
       }
     }
   }

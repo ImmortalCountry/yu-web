@@ -3,6 +3,7 @@
  */
 const linkUrl = {
   articleUrl: '/article',
+  searchUrl: '/search',
   baseUrl: '/base',
   userUrl: '/user',
   gatheringUrl: '/gathering'

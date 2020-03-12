@@ -20,6 +20,11 @@ const article = {
     const {data: res} = await axios.post(`${linkUrl.articleUrl}/articles`, Args);
     return res
   },
+
+  async searchArticles(key, page, size) {
+    const {data: res} = await axios.get(`${linkUrl.searchUrl}/articles/${key}/${page}/${size}`);
+    return res
+  },
 }
 
 export default article;

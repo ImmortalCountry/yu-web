@@ -39,8 +39,8 @@
                 <div class="text-img">
                   <el-image
                     style="width: 100%; height: 100%;"
-                    src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-                    fit="fill"></el-image>
+                    :src="articleInfo.image"
+                    fit="contain"></el-image>
                 </div>
                 <!--                标题-->
                 <div class="text-title">
