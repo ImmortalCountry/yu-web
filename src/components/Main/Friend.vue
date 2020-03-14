@@ -3,14 +3,14 @@
     <div style="width: 1000px;">
       <img src="../../assets/page-banner.png">
     </div>
-    <div class="content" v-for="item in 40" :key="item">
+    <div class="content" v-for="item in 2" :key="item">
       <el-card class="box-card">
         <el-row :gutter="20">
           <el-col :span="5" style="height: 160px">
             <img style="height: 160px; width: 170px; object-fit: fill" src="../../assets/sg.png"/>
           </el-col>
           <el-col :span="12" style="height: 160px">
-            <div class="text"><b>昵称</b></div>
+            <div class="text"><b>{{}}</b></div>
             <div class="text" style="font-size: xx-small; color: #b2bac2">24岁|女|金牛座|软件工程师</div>
             <div class="text">座右铭：我想和你啪啪啪</div>
           </el-col>
@@ -32,7 +32,32 @@
 </template>
 
 <script>
-  export default {}
+  export default {
+    data() {
+      return {
+        userList: [],
+        user: {
+          id: '',
+        }
+      }
+    },
+    created() {
+      let user = this.$sessionUtils.getUserInfo();
+      if (user !== null) {
+        this.user.id = user.id;
+      }
+      this.getUserList(this.user.id);
+    },
+    methods: {
+      getUserList(exceptId) {
+        this.$api.user.userList(exceptId).then(res => {
+          if (res.flag) {
+            this.userList = res.data;
+          }
+        })
+      }
+    }
+  }
 </script>
 
 <style scoped lang="scss">

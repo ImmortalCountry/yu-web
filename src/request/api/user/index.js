@@ -7,6 +7,12 @@ const user = {
     const {data: res} = await axios.get(`${linkUrl.userUrl}/users/${id}`);
     return res
   },
+
+  // 获取除了 exceptId 的所有用户
+    async userList(exceptId) {
+      const {data: res} = await axios.get(`${linkUrl.userUrl}/users/userList/${exceptId}`);
+      return res
+    },
   // 关注信息
   async attentionInfo(userId, targetUserId) {
     const {data: res} = await axios.get(`${linkUrl.userUrl}/users/attention/${userId}/${targetUserId}`);

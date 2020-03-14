@@ -35,7 +35,7 @@
             <el-button @click="showReply(item)" size="mini">评论{{item.comment}}</el-button>
           </div>
           <!--          回复-->
-          <el-row v-for="children in item.children" :key="children._id" v-if="item.isReply"
+          <el-row v-for="children in item.children" :key="children._id" v-if="isShowReply(item)"
                   style="margin-left: 30px">
             <el-divider></el-divider>
             <el-col style="font-size: xx-small; color: #b2bac2">
@@ -48,16 +48,17 @@
             </el-col>
           </el-row>
           <div style="width: 558px; text-align: right;">
-            <el-button @click="showReply(item)" v-if="item.isReply" size="mini">收起回复</el-button>
+            <el-button @click="showReply(item)" v-if="isShowReply(item)" size="mini">收起回复</el-button>
           </div>
           <el-input :autosize="{ minRows: 5, maxRows: 5}"
                     maxlength="300" type="textarea"
                     show-word-limit
                     v-model="spitReply.content"
-                    v-if="item.isReply">
+                    v-if="isShowReply(item)">
           </el-input>
           <div style="width: 558px; text-align: right;">
-            <el-button @click="addSpitReply(item._id)" v-if="item.isReply" size="mini" :disabled="!spitReply.content > 0">回复
+            <el-button @click="addSpitReply(item._id)" v-if="isShowReply(item)" size="mini"
+                       :disabled="!spitReply.content > 0">回复
             </el-button>
           </div>
         </el-card>
@@ -72,6 +73,7 @@
   export default {
     data() {
       return {
+        showId: '',
         spitReply: {
           content: '',
         },
@@ -97,6 +99,12 @@
       this.getSpitList();
     },
     methods: {
+      isShowReply(item) {
+        if (item._id === this.showId){
+          item.isReply = true;
+        }
+        return item._id === this.showId || item.isReply
+      },
       addDialogClosed() {
         this.spit.content = '';
       },
@@ -104,8 +112,6 @@
         this.$api.spit.getSpitList().then(res => {
           if (res.flag) {
             this.spitList = res.data;
-            // this.spitList.children = "xx"
-            // console.log(this.spitList)
           }
         });
       },
@@ -116,6 +122,7 @@
         this.$api.spit.saveSpit(this.spit).then(res => {
           if (res.flag) {
             this.$message.success(res.message);
+            this.spit.content = '';
             this.getSpitList();
           }
         });
@@ -129,12 +136,14 @@
         this.$api.spit.saveSpit(this.spitReply).then(res => {
           if (res.flag) {
             this.$message.success(res.message);
-            this.spitReply.content='';
+            this.spitReply.content = '';
+            this.showId = res.data;
             this.getSpitList();
           }
         });
       },
       showReply(item) {
+        this.showId='',
         item.isReply = !item.isReply;
       },
     },

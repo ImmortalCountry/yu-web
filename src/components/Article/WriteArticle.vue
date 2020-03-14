@@ -130,9 +130,6 @@
           this.channelList = res.data;
         })
       },
-      isDone(){
-
-      }
     },
   }
 </script>
