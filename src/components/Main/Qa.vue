@@ -37,7 +37,7 @@
       </el-card>
     </div>
 
-    <!--登录-->
+    <!--发布问题-->
 
     <el-dialog
       @close="addDialogClosed"
@@ -102,7 +102,7 @@
           }
         });
         this.qaDialogVisible = false;
-
+        this.$router.go(0);
       },
       addDialogClosed() {
         this.questionForm.title = '';

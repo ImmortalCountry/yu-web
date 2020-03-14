@@ -4,6 +4,7 @@ import base from '@/request/api/base';
 import user from '@/request/api/user'
 import gathering from '@/request/api/gathering'
 import qa from '@/request/api/qa'
+import spit from '@/request/api/spit'
 
 // 其他模块的接口……
 /**
@@ -15,6 +16,7 @@ export default {
   base,
   user,
   gathering,
-  qa
+  qa,
+  spit,
   // ……
 }
