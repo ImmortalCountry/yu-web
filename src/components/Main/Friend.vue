@@ -7,7 +7,7 @@
       <el-card class="box-card">
         <el-row :gutter="20">
           <el-col :span="5" style="height: 160px">
-            <img style="height: 160px; width: 170px; object-fit: fill" src="../../assets/sg.png"/>
+            <img style="height: 160px; width: 170px; object-fit: fill" :src="item.avatar"/>
           </el-col>
           <el-col :span="12" style="height: 160px">
             <div class="text"><b>{{item.nickName}}</b></div>
@@ -48,11 +48,7 @@
       }
     },
     created() {
-      let user = this.$sessionUtils.getUserInfo();
-      if (user !== null) {
-        this.user.id = user.id;
-      }
-      this.getUserList(this.user.id);
+      this.getUserList();
     },
     methods: {
       getUserList(exceptId) {
@@ -66,15 +62,19 @@
         this.$api.friend.like(friendId).then(res => {
           if (res.flag) {
             this.$message.success(res.message);
+          } else {
+            this.$message.success(res.message);
           }
         })
       },
       noLike(friendId) {
-        // this.$api.friend.noLike(friendId).then(res => {
-        //   if (res.flag) {
-        //     this.$message.success(res.message);
-        //   }
-        // })
+        this.$api.friend.noLike(friendId).then(res => {
+          if (res.flag) {
+            this.$message.success(res.message);
+          } else {
+            this.$message.success(res.message);
+          }
+        })
       }
     }
   }

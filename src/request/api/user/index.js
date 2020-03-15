@@ -9,8 +9,8 @@ const user = {
   },
 
   // 获取除了 exceptId 的所有用户
-    async userList(exceptId) {
-      const {data: res} = await axios.get(`${linkUrl.userUrl}/users/userList/${exceptId}`);
+    async userList() {
+      const {data: res} = await axios.get(`${linkUrl.userUrl}/users/userList`);
       return res
     },
   // 关注信息

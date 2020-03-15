@@ -18,6 +18,30 @@
         </el-row>
       </el-card>
     </div>
+
+    <!--发布问题-->
+
+    <el-dialog
+      @close="addDialogClosed"
+      title="发布问题"
+      :visible.sync="recruitDialogVisible"
+      width="40%">
+      <!--      内容主题区域-->
+      <el-form ref="addFormRef" :model="recruitForm" label-width="70px">
+        <el-form-item label="标题">
+          <el-input v-model="recruitForm.company"></el-input>
+        </el-form-item>
+        <el-form-item label="内容">
+          <el-input type="textarea" :autosize="{ minRows: 10, maxRows: 20}" v-model="recruitForm.condition"></el-input>
+        </el-form-item>
+      </el-form>
+
+      <!--      底部区域-->
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="qaDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addQuestion">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -25,15 +49,29 @@
 <script>
   export default {
     data() {
-      return {}
+      return {
+        recruitForm:{
+          company:'',
+          office:'',
+          salary:'',
+          address:'',
+          mobile:'',
+          condition:'',
+          education:'',
+        },
+        recruitDialogVisible: false,
+      }
     },
     created() {
 
     },
     methods: {
       openAddRecruit() {
+        this.recruitDialogVisible = true;
+      },
+      addDialogClosed(){
 
-      }
+      },
     }
   }
 
