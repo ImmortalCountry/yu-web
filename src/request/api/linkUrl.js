@@ -9,6 +9,7 @@ const linkUrl = {
   gatheringUrl: '/gathering',
   qaUrl: '/qa',
   spitUrl:'/spit',
+  friendUrl:'/friend',
 };
 
 export default linkUrl;

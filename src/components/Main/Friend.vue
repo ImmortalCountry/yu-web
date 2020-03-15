@@ -3,23 +3,29 @@
     <div style="width: 1000px;">
       <img src="../../assets/page-banner.png">
     </div>
-    <div class="content" v-for="item in 2" :key="item">
+    <div class="content" v-for="item in userList" :key="item.id">
       <el-card class="box-card">
         <el-row :gutter="20">
           <el-col :span="5" style="height: 160px">
             <img style="height: 160px; width: 170px; object-fit: fill" src="../../assets/sg.png"/>
           </el-col>
           <el-col :span="12" style="height: 160px">
-            <div class="text"><b>{{}}</b></div>
-            <div class="text" style="font-size: xx-small; color: #b2bac2">24岁|女|金牛座|软件工程师</div>
-            <div class="text">座右铭：我想和你啪啪啪</div>
+            <div class="text"><b>{{item.nickName}}</b></div>
+            <div class="text" style="font-size: xx-small; color: #b2bac2">
+              <span>年龄：{{item.age}}</span>
+              <el-divider direction="vertical"></el-divider>
+              <span>性别：{{item.sex}}</span>
+              <el-divider direction="vertical"></el-divider>
+              <span>职业：{{item.office}}</span>
+            </div>
+            <div class="text">兴趣：{{item.interest}}</div>
           </el-col>
           <el-col :span="7" style="height: 160px">
             <div class="btn">
-              <el-button circle icon="el-icon-view" style="background-color: red"></el-button>
+              <el-button circle icon="el-icon-view" style="background-color: red" @click="like(item.id)"></el-button>
             </div>
             <div class="btn">
-              <el-button circle icon="el-icon-error"></el-button>
+              <el-button circle icon="el-icon-error" @click="noLike(item.id)"></el-button>
             </div>
             <div class="btn">
               <el-button circle icon="el-icon-chat-dot-round"></el-button>
@@ -55,6 +61,20 @@
             this.userList = res.data;
           }
         })
+      },
+      like(friendId) {
+        this.$api.friend.like(friendId).then(res => {
+          if (res.flag) {
+            this.$message.success(res.message);
+          }
+        })
+      },
+      noLike(friendId) {
+        // this.$api.friend.noLike(friendId).then(res => {
+        //   if (res.flag) {
+        //     this.$message.success(res.message);
+        //   }
+        // })
       }
     }
   }
