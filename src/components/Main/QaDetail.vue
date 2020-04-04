@@ -35,7 +35,7 @@
             placeholder="请输入内容"
             v-model="reply.content">
           </el-input>
-          <el-button @click="addReply">回复</el-button>
+          <el-button @click="addReply" :disabled="!reply.content > 0">回复</el-button>
         </el-col>
       </el-row>
     </el-main>
