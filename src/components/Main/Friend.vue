@@ -42,13 +42,13 @@
     data() {
       return {
         userList: [],
-        user: {
-          id: '',
-        }
+        exceptId:'',
+        user:''
       }
     },
     created() {
-      this.getUserList();
+      this.user = this.$sessionUtils.getUserInfo();
+      this.getUserList(this.user.id);
     },
     methods: {
       getUserList(exceptId) {
