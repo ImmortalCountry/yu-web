@@ -42,6 +42,12 @@ const user = {
   async attention(userId, targetUserId, amount){
     const {data: res} = await axios.put(`${linkUrl.userUrl}/users/attention/${userId}/${targetUserId}/${amount}`);
         return res
+  },
+
+  // 获取用户排行 Top 10
+  async getUsersTop10(){
+    const {data: res} = await axios.get(`${linkUrl.userUrl}/users`);
+    return res
   }
 };
 export default user;

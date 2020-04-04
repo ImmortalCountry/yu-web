@@ -7,7 +7,7 @@
         <div class="grid-content bg-purple" style="height: 100%"
              v-infinite-scroll="load"
              infinite-scroll-disabled="disabled">
-          <el-row style="margin-top: 2px"v-for="item in articleList" :key="item.id">
+          <el-row style="margin-top: 2px" v-for="item in articleList" :key="item.id">
             <el-col :span="18" style="background-color: #409eff">
               <div class="grid-content bg-purple" style="height: 150px">
                 <el-row>
@@ -57,33 +57,9 @@
           </div>
         </div>
         <!--        作者排行榜-->
-        <div style="background-color: #cf9236; height: 100px; overflow:auto">
-          <el-row>
-            <el-col>作者2</el-col>
-          </el-row>
-          <el-row>
-            <el-col>作者3</el-col>
-          </el-row>
-          <el-row>
-            <el-col>作者4</el-col>
-          </el-row>
-          <el-row>
-            <el-col>作者5</el-col>
-          </el-row>
-          <el-row>
-            <el-col>作者6</el-col>
-          </el-row>
-          <el-row>
-            <el-col>作者7</el-col>
-          </el-row>
-          <el-row>
-            <el-col>作者8</el-col>
-          </el-row>
-          <el-row>
-            <el-col>作者9</el-col>
-          </el-row>
-          <el-row>
-            <el-col>作者10</el-col>
+        <div style="background-color: #cf9236; height: 250px; overflow:auto">
+          <el-row v-for="item in users" :key="item.id">
+            <el-col>{{item.nickName}}</el-col>
           </el-row>
         </div>
 
@@ -143,6 +119,7 @@
     },
     data() {
       return {
+        users: [],
         channelId: '1',
         articleList: [],
         loading: false,
@@ -152,6 +129,7 @@
     },
     created() {
       this.getArticleList(this.channelId, this.count, 5)
+      this.getUsersTop10();
     },
     computed: {
       noMore() {
@@ -163,6 +141,13 @@
       },
       getChannelId() {
         return this.$store.getters.getChannelId;
+      },
+      getUsersTop10() {
+        this.$api.user.getUsersTop10().then(res => {
+          if (res.flag){
+            this.users = res.data;
+          }
+        })
       }
     },
 
