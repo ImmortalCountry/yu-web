@@ -109,12 +109,12 @@
           if (res.flag) {
             this.$message.success(res.message);
             this.questionList = res.data;
+            this.getQuestionList();
           } else {
             this.$message.error(res.message);
           }
         });
         this.qaDialogVisible = false;
-        this.$router.go(0);
       },
       addDialogClosed() {
         // this.questionForm.title = '';
