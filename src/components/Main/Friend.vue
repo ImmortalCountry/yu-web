@@ -28,12 +28,30 @@
               <el-button circle icon="el-icon-error" @click="noLike(item.id)"></el-button>
             </div>
             <div class="btn">
-              <el-button circle icon="el-icon-chat-dot-round"></el-button>
+              <el-button circle icon="el-icon-chat-dot-round" @click="openSendMessage"></el-button>
             </div>
           </el-col>
         </el-row>
       </el-card>
     </div>
+    <el-dialog
+      @close="addDialogClosed"
+      title="发送私信"
+      :visible.sync="messageDialogVisible"
+      width="40%">
+      <!--      内容主题区域-->
+      <el-form ref="addFormRef" :model="messageForm" label-width="70px">
+        <el-form-item label="内容">
+          <el-input type="textarea" :autosize="{ minRows: 10, maxRows: 20}" v-model="messageForm.content"></el-input>
+        </el-form-item>
+      </el-form>
+
+      <!--      底部区域-->
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="messageDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="sendMessage" :disabled="!messageForm.content > 0">发 送</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -42,8 +60,12 @@
     data() {
       return {
         userList: [],
-        exceptId:'',
-        user:''
+        exceptId: '',
+        user: '',
+        messageDialogVisible: false,
+        messageForm:{
+          content:'',
+        },
       }
     },
     created() {
@@ -75,7 +97,16 @@
             this.$message.success(res.message);
           }
         })
-      }
+      },
+      openSendMessage() {
+        this.messageDialogVisible = true;
+      },
+      sendMessage() {
+        console.log(this.messageForm.content)
+      },
+      addDialogClosed(){
+        this.messageForm.content=""
+      },
     }
   }
 </script>
