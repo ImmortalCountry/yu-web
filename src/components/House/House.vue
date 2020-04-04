@@ -39,6 +39,10 @@
           {
             path: 'myself',
             name: '个人信息'
+          },
+          {
+            path: 'messageCenter',
+            name: '消息中心'
           }
         ]
       }

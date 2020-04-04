@@ -16,6 +16,7 @@ import Follow from "../components/House/Follow";
 import MyTable from "../components/House/MyTable";
 import Search from "../components/Article/searchPage";
 import QaDetail from "../components/Main/QaDetail";
+import messageCenter from "../components/common/messageCenter";
 
 Vue.use(Router);
 const routerPush = Router.prototype.push;
@@ -96,6 +97,10 @@ export default new Router({
         {
           path:'/user/house/myself',
           component: MyTable
+        },
+        {
+          path:'/user/house/messageCenter',
+          component: messageCenter
         }
       ]
     },

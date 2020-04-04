@@ -40,7 +40,7 @@
           <div class="button" v-if="isLogin">
             <el-badge :value="12" class="item">
               <el-button icon="el-icon-message-solid" :circle="true" size="small"
-                         style="font-size: large;height: 100%"></el-button>
+                         style="font-size: large;height: 100%" @click="toMessageCenter"></el-button>
             </el-badge>
           </div>
           <div class="button" v-if="!isLogin">
@@ -244,6 +244,10 @@
       searchArticle() {
         this.$router.push({path: '/search', query: {key: this.key}});
         this.$router.go(0);
+      },
+      // 去消息中心
+      toMessageCenter(){
+        this.$router.push({path: '/user/house/messageCenter'})
       }
     }
   }
