@@ -105,8 +105,8 @@
         this.$router.go(0);
       },
       addDialogClosed() {
-        this.questionForm.title = '';
-        this.questionForm.content = '';
+        // this.questionForm.title = '';
+        // this.questionForm.content = '';
       },
     }
   }
