@@ -9,15 +9,15 @@
       <el-card class="box-card">
         <el-row :gutter="20">
           <el-col :span="3">
-            <el-button style="color: #8cc5ff" class="textContainer"></el-button>
+            <el-button style="color: #8cc5ff" class="textContainer">{{item.replyName}}</el-button>
           </el-col>
           <el-col :span="10">
-            <el-button class="textContainer">回答于 2017-07-05 15:09</el-button>
+            <el-button class="textContainer">最新回答时间：{{$commonUtils.timeTrans(item.replyTime)}}</el-button>
           </el-col>
         </el-row>
         <el-row :gutter="20">
           <el-col :span="13">
-            <el-button class="textContainer" @click="goDetail">{{item.title}}</el-button>
+            <el-button class="textContainer" @click="goDetail(item.id)">{{item.title}}</el-button>
           </el-col>
         </el-row>
         <el-row :gutter="20">
@@ -31,7 +31,12 @@
             <el-button style="color: green" class="textContainer">回答 20</el-button>
           </el-col>
           <el-col :span="2">
-            <el-button style="margin-left:200px; width: 400px">浏览量 50 | 2017-07-05 15:09 来自 毕鹏</el-button>
+            <el-button style="margin-left:200px; width: 400px"><span>浏览量 {{item.visits}}</span>
+              <el-divider direction="vertical"></el-divider>
+              <span>{{$commonUtils.timeTrans(item.createTime)}}</span>
+              <el-divider direction="vertical"></el-divider>
+              <span>来自：{{item.nickName}}</span>
+            </el-button>
           </el-col>
         </el-row>
       </el-card>
@@ -80,8 +85,15 @@
       this.getQuestionList();
     },
     methods: {
-      goDetail() {
-        console.log("进入详情页")
+      goDetail(id) {
+        // console.log("进入详情页" + id)
+        let routeData = this.$router.resolve({
+          path: "/qa/detail",
+          query: {
+            id: id
+          }
+        });
+        window.open(routeData.href, '_blank');
       },
       getQuestionList() {
         this.$api.qa.getQuestionList().then(res => {

@@ -15,6 +15,7 @@ import Fans from "../components/House/Fans";
 import Follow from "../components/House/Follow";
 import MyTable from "../components/House/MyTable";
 import Search from "../components/Article/searchPage";
+import QaDetail from "../components/Main/QaDetail";
 
 Vue.use(Router);
 const routerPush = Router.prototype.push;
@@ -74,6 +75,10 @@ export default new Router({
     {
       path: '/article/detail',
       component: ArticleDetail
+    },
+    {
+      path: '/qa/detail',
+      component: QaDetail
     },
     {
       path: '/user/house',
