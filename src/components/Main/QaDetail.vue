@@ -8,7 +8,7 @@
       <el-row>
         <el-col class="title">
           <span style="float:left;text-align: center; background-color:red;height: 100%; width: 100%">
-            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 啥的撒的撒撒
+            {{question.title}}
           </span>
         </el-col>
       </el-row>

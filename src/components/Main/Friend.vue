@@ -111,6 +111,7 @@
           if (res.flag) {
             this.$message.success(res.message);
           }
+          this.messageDialogVisible = false;
         });
       },
       addDialogClosed() {
