@@ -28,7 +28,7 @@
               <el-button circle icon="el-icon-error" @click="noLike(item.id)"></el-button>
             </div>
             <div class="btn">
-              <el-button circle icon="el-icon-chat-dot-round" @click="openSendMessage"></el-button>
+              <el-button circle icon="el-icon-chat-dot-round" @click="openSendMessage(item.id)"></el-button>
             </div>
           </el-col>
         </el-row>
@@ -49,7 +49,7 @@
       <!--      底部区域-->
       <span slot="footer" class="dialog-footer">
         <el-button @click="messageDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="sendMessage" :disabled="!messageForm.content > 0">发 送</el-button>
+        <el-button type="primary" @click="sendMessage()" :disabled="!messageForm.content > 0">发 送</el-button>
       </span>
     </el-dialog>
   </div>
@@ -62,9 +62,10 @@
         userList: [],
         exceptId: '',
         user: '',
+        receiverId:'',
         messageDialogVisible: false,
-        messageForm:{
-          content:'',
+        messageForm: {
+          content: '',
         },
       }
     },
@@ -85,7 +86,7 @@
           if (res.flag) {
             this.$message.success(res.message);
           } else {
-            this.$message.success(res.message);
+            this.$message.error(res.message);
           }
         })
       },
@@ -98,14 +99,23 @@
           }
         })
       },
-      openSendMessage() {
+      openSendMessage(receiverId) {
         this.messageDialogVisible = true;
+        this.receiverId = receiverId;
       },
       sendMessage() {
-        console.log(this.messageForm.content)
+        let arg = {
+          content: this.messageForm.content,
+        };
+        this.$api.friend.sendMessage(arg, this.receiverId).then(res => {
+          if (res.flag) {
+            this.$message.success(res.message);
+          }
+        });
       },
-      addDialogClosed(){
-        this.messageForm.content=""
+      addDialogClosed() {
+        this.messageForm.content = "";
+        this.receiverId = '';
       },
     }
   }

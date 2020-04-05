@@ -13,6 +13,11 @@ const friend={
       const {data: res} = await axios.post(`${linkUrl.friendUrl}/friends/noLike/${friendId}`);
       return res
     },
+   // 发送私信
+    async sendMessage(arg, receiverId) {
+      const {data: res} = await axios.post(`${linkUrl.friendUrl}/friends/sendMessage/${receiverId}`, arg);
+      return res
+    },
 }
 
 export default friend;
