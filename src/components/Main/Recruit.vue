@@ -70,7 +70,7 @@
         this.recruitDialogVisible = true;
       },
       addDialogClosed(){
-
+        this.recruitDialogVisible = true;
       },
     }
   }

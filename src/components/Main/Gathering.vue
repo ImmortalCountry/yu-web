@@ -45,8 +45,8 @@
 
       <!--      底部区域-->
       <span slot="footer" class="dialog-footer">
-        <el-button @click="qaDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addQuestion">确 定</el-button>
+        <el-button @click="gatheringDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addGathering">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -61,12 +61,12 @@
       return {
         gatheringList: [],
         gatheringDialogVisible: false,
-        gatheringForm:{
-          title:"",
-          city:"",
-          imageUrl:"",
-          eventUrl:"",
-          content:"",
+        gatheringForm: {
+          title: "",
+          city: "",
+          imageUrl: "",
+          eventUrl: "",
+          content: "",
         }
       }
     },
@@ -74,8 +74,12 @@
       openAddGathering() {
         this.gatheringDialogVisible = true;
       },
-      addDialogClosed(){
-
+      addDialogClosed() {
+        this.gatheringForm.title = "";
+        this.gatheringForm.city = "";
+        this.gatheringForm.imageUrl = "";
+        this.gatheringForm.eventUrl = "";
+        this.gatheringForm.content = "";
       },
       getGatheringList() {
         this.$api.gathering.gatheringList().then(res => {
@@ -85,6 +89,11 @@
       openWindow(eventUrl) {
         console.log(eventUrl)
         window.open(eventUrl);
+      },
+      addGathering() {
+        this.$api.gathering.addGathering(this.gatheringForm).then(res => {
+          this.gatheringDialogVisible = false;
+        });
       }
     }
   }
