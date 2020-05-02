@@ -13,7 +13,7 @@
               <div class="grid-content bg-purple" style="height: 150px">
                 <el-row>
                   <el-col :span="10">作者</el-col>
-                  <el-col :span="10">{{item.createTime}}</el-col>
+                  <el-col :span="10">{{$commonUtils.timeTrans(item.createTime)}}</el-col>
                 </el-row>
                 <el-row style="cursor: pointer" @click.native="goDetail(item.id)">
                   <el-col style="width: 100%;">

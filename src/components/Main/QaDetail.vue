@@ -7,26 +7,27 @@
     <el-main class="main-box">
       <el-row>
         <el-col class="title">
-          <span style="float:left;text-align: center; background-color:red;height: 100%; width: 100%">
+          <span style="float:left;text-align: center; font-size: xx-large; height: 100%; width: 100%">
             {{question.title}}
           </span>
         </el-col>
       </el-row>
       <el-row>
         <el-col class="content">
-          <span style="height: 100%">
+          <span style="height: 100%; font-size: large">
             {{question.content}}
           </span>
         </el-col>
       </el-row>
 
       <el-row v-for="item in replies" :key="item.id">
+        <el-divider></el-divider>
         <el-col class="reply">
-          <span>{{item.content}}</span>
-
-          a
+          <div style="font-size: small">{{item.replyName}} 回答于: {{$commonUtils.timeTrans(item.replyTime)}}</div>
+          <div style="margin-left:20px; font-size: small">{{item.content}}</div>
         </el-col>
       </el-row>
+      <el-divider></el-divider>
       <el-row style="margin-top: 10px">
         <el-col>
           <el-input
@@ -113,18 +114,18 @@
   }
 
   .title {
-    background-color: #409eff;
+    /*background-color: #409eff;*/
     height: 30px;
   }
 
   .content {
-    background-color: blue;
+    /*background-color: blue;*/
     margin-top: 20px;
   }
 
   .reply {
-    background-color: #13ce66;
-    margin-top: 20px;
+    /*background-color: #13ce66;*/
+    /*margin-top: 10px;*/
   }
 
 </style>
