@@ -23,7 +23,7 @@
 
 <style scoped lang="scss">
   .home {
-    background-color: #eeeeee;
+    /*background-color: #eeeeee;*/
     height: 100%;
   }
   .main-container{

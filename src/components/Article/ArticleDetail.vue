@@ -113,8 +113,8 @@
         if (user !== null && user.id !== this.authorId) {
           this.isShowBtn = true;
           this.userId = user.id;
+          this.getAttentionInfo(user.id, this.authorId);
         }
-        this.getAttentionInfo(user.id, this.authorId);
       },
       getDetail() {
         this.$api.article.getArticleDetail(this.authorId).then(res => {

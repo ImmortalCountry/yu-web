@@ -8,15 +8,15 @@
              v-infinite-scroll="load"
              infinite-scroll-disabled="disabled">
           <el-row style="margin-top: 2px" v-for="item in articleList" :key="item.id">
-            <el-col :span="18" style="background-color: #409eff">
+            <el-divider></el-divider>
+            <el-col :span="18">
               <div class="grid-content bg-purple" style="height: 150px">
                 <el-row>
-                  <el-col :span="10" style="background-color: blue">作者</el-col>
-                  <el-col :span="10" style="background-color: #cf9236">{{item.createTime}}</el-col>
+                  <el-col :span="10">作者</el-col>
+                  <el-col :span="10">{{item.createTime}}</el-col>
                 </el-row>
-
                 <el-row style="cursor: pointer" @click.native="goDetail(item.id)">
-                  <el-col style="width: 100%; background-color: #8c939d;">
+                  <el-col style="width: 100%;">
                     <el-link><b style="color: black; font-size: medium">{{item.title}}</b></el-link>
                   </el-col>
 
@@ -34,7 +34,7 @@
                 </el-row>
               </div>
             </el-col>
-            <el-col :span="6" style="background-color: blue">
+            <el-col :span="6">
               <div class="grid-content bg-purple" style="height: 150px">
                 <el-image v-if="item.url !==  null" style="width: 100%; height: 100%" :src="item.url"
                           fit="contain"></el-image>
@@ -57,15 +57,16 @@
           </div>
         </div>
         <!--        作者排行榜-->
-        <div style="background-color: #cf9236; height: 250px; overflow:auto">
-          <el-row v-for="item in users" :key="item.id">
+        <div>🎖️作者榜</div>
+        <div style="height: 250px; overflow:auto">
+          <el-row v-for="item in users" :key="item.id" style="margin-top: 10px">
             <el-col>{{item.nickName}}</el-col>
           </el-row>
         </div>
 
-        <!--        作者二维码-->
+        <!--        二维码-->
         <div>
-          我是二维码
+          <img style="width: 100%; height: 100%" src="../.././assets/ewm.png"/>
         </div>
       </el-col>
     </el-row>
