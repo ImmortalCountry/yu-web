@@ -9,7 +9,7 @@
       <el-card class="box-card">
         <el-row :gutter="20">
           <el-col :span="3">
-            <el-button style="color: #8cc5ff" class="textContainer">{{item.replyName}}</el-button>
+<!--            <el-button style="color: #8cc5ff" class="textContainer">{{item.replyName}}</el-button>-->
           </el-col>
           <el-col :span="10">
             <el-button class="textContainer">最新回答时间：{{$commonUtils.timeTrans(item.replyTime)}}</el-button>
@@ -22,13 +22,13 @@
         </el-row>
         <el-row :gutter="20">
           <el-col :span="3">
-            <el-button style="color: blue" class="textContainer">Java</el-button>
+            <el-button style="color: blue" class="textContainer">{{item.channelName}}</el-button>
           </el-col>
           <el-col :span="3">
-            <el-button style="color: red" class="textContainer">点赞 100</el-button>
+            <el-button style="color: red" class="textContainer">点赞 {{item.thumbUp}}</el-button>
           </el-col>
           <el-col :span="3">
-            <el-button style="color: green" class="textContainer">回答 20</el-button>
+            <el-button style="color: green" class="textContainer">回答 {{item.reply}}</el-button>
           </el-col>
           <el-col :span="2">
             <el-button style="margin-left:200px; width: 400px"><span>浏览量 {{item.visits}}</span>
