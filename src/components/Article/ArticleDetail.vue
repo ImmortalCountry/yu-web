@@ -8,7 +8,9 @@
       <el-main class="main-box">
         <el-row :gutter="20" style="height: 100%">
           <el-col :span="5" style="height: 100%">
-            <div style="background-color: aqua" class="main-left"><span>左侧</span></div>
+            <div class="main-left">
+              <span></span>
+            </div>
           </el-col>
           <el-col :span="12" style="height: 100%">
             <div class="main-center">
@@ -53,7 +55,20 @@
             </div>
           </el-col>
           <el-col :span="5" style="height: 100%">
-            <div style="background-color: blueviolet" class="main-right">右侧</div>
+            <div class="main-right">
+              <el-card class="box-card">
+                <div slot="header" class="clearfix">
+                  <span>作者信息</span>
+                  <el-button style="float: right; padding: 3px 0" type="text">关注</el-button>
+                </div>
+                <div>
+                  <img src="../../assets/ewm.png">
+                  <div style="font-size: xx-large">作者：{{articleInfo.authorInfo.nickName}}</div>
+                  <div style="font-size: xx-large">工作：{{articleInfo.authorInfo.office}}</div>
+                  <div style="font-size: xx-large">粉丝数：{{articleInfo.authorInfo.fansCount}}</div>
+                </div>
+              </el-card>
+            </div>
           </el-col>
         </el-row>
       </el-main>

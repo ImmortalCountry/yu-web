@@ -56,6 +56,7 @@
             我是一个广告2
           </div>
         </div>
+        <el-divider></el-divider>
         <!--        作者排行榜-->
         <div>🎖️作者榜</div>
         <div style="height: 250px; overflow:auto">
@@ -63,8 +64,9 @@
             <el-col>{{item.nickName}}</el-col>
           </el-row>
         </div>
-
+        <el-divider></el-divider>
         <!--        二维码-->
+        <div>二维码</div>
         <div>
           <img style="width: 100%; height: 100%" src="../.././assets/ewm.png"/>
         </div>
