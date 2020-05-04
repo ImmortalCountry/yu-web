@@ -40,6 +40,7 @@
                 <!--                图片-->
                 <div class="text-img">
                   <el-image
+                    v-if="articleInfo.image !== null"
                     style="width: 100%; height: 100%;"
                     :src="articleInfo.image"
                     fit="contain"></el-image>
