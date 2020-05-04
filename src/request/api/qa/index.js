@@ -31,6 +31,11 @@ const qa={
           const {data: res} = await axios.get(`${linkUrl.qaUrl}/replies/${id}`);
           return res
     },
+    // 点赞thumbUp
+    async thumbUp(id){
+          const {data: res} = await axios.put(`${linkUrl.qaUrl}/problems/thumbUp/${id}`);
+          return res
+    }
 
 }
 

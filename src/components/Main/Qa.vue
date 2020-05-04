@@ -9,7 +9,7 @@
       <el-card class="box-card">
         <el-row :gutter="20">
           <el-col :span="3">
-<!--            <el-button style="color: #8cc5ff" class="textContainer">{{item.replyName}}</el-button>-->
+            <!--            <el-button style="color: #8cc5ff" class="textContainer">{{item.replyName}}</el-button>-->
           </el-col>
           <el-col :span="10">
             <el-button class="textContainer">最新回答时间：{{$commonUtils.timeTrans(item.replyTime)}}</el-button>
@@ -25,10 +25,12 @@
             <el-button style="color: blue" class="textContainer">{{item.channelName}}</el-button>
           </el-col>
           <el-col :span="3">
-            <el-button style="color: red" class="textContainer">点赞 {{item.thumbUp}}</el-button>
+            <el-button style="color: red" class="textContainer" @click="thumbUp(item.id)">点赞 {{item.thumbUp}}
+            </el-button>
           </el-col>
           <el-col :span="3">
-            <el-button style="color: green" class="textContainer">回答 {{item.reply}}</el-button>
+            <el-button style="color: green" class="textContainer" @click="goDetail(item.id)">回答 {{item.reply}}
+            </el-button>
           </el-col>
           <el-col :span="2">
             <el-button style="margin-left:200px; width: 400px"><span>浏览量 {{item.visits}}</span>
@@ -62,7 +64,7 @@
       <!--      底部区域-->
       <span slot="footer" class="dialog-footer">
         <el-button @click="qaDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addQuestion">确 定</el-button>
+        <el-button type="primary" @click="addQuestion" :disabled="!questionForm.content > 0">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -85,6 +87,11 @@
       this.getQuestionList();
     },
     methods: {
+      thumbUp(id) {
+        this.$api.qa.thumbUp(id).then(res => {
+          this.$message.success(res.message)
+        })
+      },
       goDetail(id) {
         // console.log("进入详情页" + id)
         let routeData = this.$router.resolve({
