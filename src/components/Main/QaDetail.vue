@@ -95,8 +95,10 @@
         this.$api.qa.addReply(this.reply).then(res => {
           if (res.flag) {
             this.$message.success(res.message);
-            this.$router.go(0);
+            // this.$router.go(0);\
+            this.getReplies(this.problemId);
           }
+          this.reply.content="";
         })
       },
       getReplies(id) {
