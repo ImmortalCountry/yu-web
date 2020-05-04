@@ -29,7 +29,7 @@
             </el-col>
           </el-row>
           <div style="margin-top: 30px; margin-left: 50px; width: 320px;height: 180px;">
-            <el-image style="width: 100%; height: 100%" :src="args.url" fit="contain"/>
+            <el-image style="width: 100%; height: 100%" v-if="args.url !== ''" :src="args.url" fit="contain"/>
           </div>
         </div>
       </el-header>
