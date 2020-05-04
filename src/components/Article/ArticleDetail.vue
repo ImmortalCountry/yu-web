@@ -122,28 +122,30 @@
 
       },
       init() {
-        this.authorId = this.$route.query.article_id;
+        this.articleId = this.$route.query.article_id;
         let user = this.$sessionUtils.getUserInfo();
         // 用户不是本文章的作者
         if (user !== null && user.id !== this.authorId) {
           this.isShowBtn = true;
           this.userId = user.id;
-          this.getAttentionInfo(user.id, this.authorId);
         }
       },
       getDetail() {
-        this.$api.article.getArticleDetail(this.authorId).then(res => {
+        this.$api.article.getArticleDetail(this.articleId).then(res => {
           this.articleInfo = res.data;
           this.nickName = res.data.authorInfo.nickName
+          this.authorId = this.articleInfo.authorInfo.id;
+          this.getAttentionInfo(this.authorId);
+
         })
       },
       attentionHandle() {
         // 如果关注了就取消关注
         if (this.isAttention === true) {
-          this.$api.user.attention(this.userId, this.AuthorId, "-1");
+          this.$api.user.attention(this.AuthorId, "-1");
         } else {
           // 关注
-          this.$api.user.attention(this.userId, this.AuthorId, "1");
+          this.$api.user.attention(this.AuthorId, "1");
         }
         this.isAttention = !this.isAttention;
         this.initBtn()
@@ -153,8 +155,8 @@
         this.buttonInfo = this.isAttention === false ? '未关注' : '已关注';
       },
       // 获取关注信息，判断是否关注
-      getAttentionInfo(userId, targetUserId) {
-        this.$api.user.attentionInfo(userId, targetUserId).then(res => {
+      getAttentionInfo(targetUserId) {
+        this.$api.user.attentionInfo(targetUserId).then(res => {
           this.isAttention = res.flag;
           this.initBtn();
         })

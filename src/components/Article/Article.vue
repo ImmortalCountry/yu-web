@@ -144,13 +144,6 @@
       },
       getChannelId() {
         return this.$store.getters.getChannelId;
-      },
-      getUsersTop10() {
-        this.$api.user.getUsersTop10().then(res => {
-          if (res.flag){
-            this.users = res.data;
-          }
-        })
       }
     },
 
@@ -158,6 +151,14 @@
     methods: {
       contentHandler(content) {
         return content.slice(0, 20);
+      },
+
+      getUsersTop10() {
+        this.$api.user.getUsersTop10().then(res => {
+          if (res.flag){
+            this.users = res.data;
+          }
+        })
       },
 
       getArticleList(channelId, page, size) {

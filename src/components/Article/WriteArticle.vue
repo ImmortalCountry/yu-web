@@ -105,14 +105,9 @@
     },
     methods: {
       refreshDetail(article_id) {
-        this.$router.push({path: '/article/detail', query: {authorId: this.args.authorId, article_id: article_id}})
+        this.$router.push({path: '/article/detail', query: {article_id: article_id}})
       },
       addArticle() {
-        let user = this.$sessionUtils.getUserInfo();
-        if (user !== null) {
-          this.args.authorId = user.id;
-        }
-
         // this.$refs.editor.setHtml(this.initContent) //如设置：后台返回来的固定内容
         this.args.content = this.$refs.editor.getHtml(this.initContent);
         this.$api.article.articleSave(this.args).then(res => {
