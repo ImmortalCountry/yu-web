@@ -23,8 +23,13 @@
       <el-row v-for="item in replies" :key="item.id">
         <el-divider></el-divider>
         <el-col class="reply">
-          <div style="font-size: small">{{item.replyName}} 回答于: {{$commonUtils.timeTrans(item.replyTime)}}</div>
-          <div style="margin-left:20px; font-size: small">{{item.content}}</div>
+          <div style="font-size: small; color: #3a8ee6">{{item.nickName}}
+            <el-divider direction="vertical"></el-divider>
+            <span style="color: #3a8ee6">回答于:</span>
+            <el-divider direction="vertical"></el-divider>
+            <span style="color: #3a8ee6">{{$commonUtils.timeTrans(item.createTime)}}</span>
+          </div>
+          <div style="margin-left:20px; font-size: small; margin-top: 8px">{{item.content}}</div>
         </el-col>
       </el-row>
       <el-divider></el-divider>
@@ -88,7 +93,7 @@
         this.reply.userId = this.user.id;
         this.reply.nickName = this.user.name;
         this.$api.qa.addReply(this.reply).then(res => {
-          if (res.flag){
+          if (res.flag) {
             this.$message.success(res.message);
             this.$router.go(0);
           }
