@@ -89,6 +89,9 @@
     methods: {
       thumbUp(id) {
         this.$api.qa.thumbUp(id).then(res => {
+          if (res.flag){
+            this.getQuestionList();
+          }
           this.$message.success(res.message)
         })
       },
