@@ -59,7 +59,7 @@
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
                   <span>作者信息</span>
-                  <el-button style="float: right; padding: 3px 0" type="text">关注</el-button>
+<!--                  <el-button style="float: right; padding: 3px 0" type="text">关注</el-button>-->
                 </div>
                 <div>
                   <img src="../../assets/ewm.png">
@@ -142,10 +142,10 @@
       attentionHandle() {
         // 如果关注了就取消关注
         if (this.isAttention === true) {
-          this.$api.user.attention(this.AuthorId, "-1");
+          this.$api.user.attention(this.authorId, "-1");
         } else {
           // 关注
-          this.$api.user.attention(this.AuthorId, "1");
+          this.$api.user.attention(this.authorId, "1");
         }
         this.isAttention = !this.isAttention;
         this.initBtn()
@@ -157,7 +157,7 @@
       // 获取关注信息，判断是否关注
       getAttentionInfo(targetUserId) {
         this.$api.user.attentionInfo(targetUserId).then(res => {
-          this.isAttention = res.flag;
+          this.isAttention = res.data;
           this.initBtn();
         })
       },
