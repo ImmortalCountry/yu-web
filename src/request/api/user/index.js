@@ -35,7 +35,7 @@ const user = {
   },
   // 更新用户信息
   async update(userInfo) {
-    const {data: res} = await axios.put(`${linkUrl.userUrl}/users/${userInfo.id}`, userInfo);
+    const {data: res} = await axios.put(`${linkUrl.userUrl}/users`, userInfo);
     return res
   },
   //修改关注状态
@@ -48,6 +48,16 @@ const user = {
   async getUsersTop10(){
     const {data: res} = await axios.get(`${linkUrl.userUrl}/users`);
     return res
-  }
+  },
+  // 获取粉丝列表
+  async getFansList(){
+    const {data: res} = await axios.get(`${linkUrl.userUrl}/users/fans`);
+    return res
+  },
+  // 获取关注列表
+  async getFollowersList(){
+    const {data: res} = await axios.get(`${linkUrl.userUrl}/users/followers`);
+    return res
+  },
 };
 export default user;

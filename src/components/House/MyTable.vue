@@ -11,7 +11,7 @@
     <el-row :gutter="20">
       <el-col :span="3" class="text-header">昵称</el-col>
       <el-col :span="6">
-        <el-input v-model="userInfo.nick_name"></el-input>
+        <el-input v-model="userInfo.nickName"></el-input>
       </el-col>
 
     </el-row>
@@ -20,6 +20,14 @@
       <el-col :span="3" class="text-header">性别</el-col>
       <el-col :span="6">
         <el-input v-model="userInfo.sex"></el-input>
+      </el-col>
+
+    </el-row>
+
+    <el-row :gutter="20">
+      <el-col :span="3" class="text-header">工作</el-col>
+      <el-col :span="6">
+        <el-input v-model="userInfo.office"></el-input>
       </el-col>
 
     </el-row>
@@ -72,7 +80,14 @@
   export default {
     data() {
       return {
-        userInfo: '',
+        userInfo: {
+          nickName:'',
+          sex:'',
+          email:'',
+          interest:'',
+          personality:'',
+          office:''
+        },
       }
     },
     created() {
@@ -127,5 +142,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  .my-table{
+    margin-left: 110px;
   }
 </style>
