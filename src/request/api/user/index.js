@@ -59,5 +59,11 @@ const user = {
     const {data: res} = await axios.get(`${linkUrl.userUrl}/users/followers`);
     return res
   },
+  // 参加交友
+  async joinFriends(mark){
+   const {data: res} = await axios.put(`${linkUrl.userUrl}/users/joinFriends/${mark}`);
+   return res
+  },
+
 };
 export default user;

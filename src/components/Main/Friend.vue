@@ -3,6 +3,9 @@
     <div style="width: 1000px;">
       <img src="../../assets/page-banner.png">
     </div>
+    <div style="width: 1000px; height: 60px; text-align: center; background-color: red">
+      <el-button style="margin-top: 10px" @click="joinFriends(1)">参加交友平台</el-button>
+    </div>
     <div class="content" v-for="item in userList" :key="item.id">
       <el-card class="box-card">
         <el-row :gutter="20">
@@ -74,6 +77,14 @@
       this.getUserList();
     },
     methods: {
+      joinFriends(mark){
+        this.$api.user.joinFriends(mark).then(res => {
+          if (res.flag) {
+            this.getUserList();
+          }
+          this.$message.success(res.message)
+        })
+      },
       getUserList() {
         this.$api.user.userList().then(res => {
           if (res.flag) {
