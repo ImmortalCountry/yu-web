@@ -10,6 +10,7 @@ const linkUrl = {
   qaUrl: '/qa',
   spitUrl:'/spit',
   friendUrl:'/friend',
+  recruitUrl:'/recruit',
 };
 
 export default linkUrl;

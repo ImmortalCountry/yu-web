@@ -10,8 +10,7 @@
             <!--            <el-img :src="item.imageUrl" :fit="cover"></el-img>-->
             <img :src="item.imageUrl" class="img-box" @click="openWindow(item.eventUrl)"/>
             <div style="margin-top: 20px" @click="openWindow(item.eventUrl)"><b>{{item.title}}</b></div>
-            <div style="text-align: center; margin-top: 30px"><span style="color: #3a8ee6;"
-                                                                    @click="openWindow(item.eventUrl)">报名参加</span></div>
+            <div style="text-align: center; margin-top: 30px"><span style="color: #3a8ee6;" @click="openWindow(item.eventUrl)">报名参加</span></div>
           </el-card>
         </el-col>
       </el-row>
@@ -87,7 +86,6 @@
         })
       },
       openWindow(eventUrl) {
-        console.log(eventUrl)
         window.open(eventUrl);
       },
       addGathering() {

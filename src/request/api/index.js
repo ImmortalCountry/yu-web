@@ -6,6 +6,7 @@ import gathering from '@/request/api/gathering'
 import qa from '@/request/api/qa'
 import spit from '@/request/api/spit'
 import friend from '@/request/api/friend'
+import recruit from '@/request/api/recruit'
 
 // 其他模块的接口……
 /**
@@ -20,5 +21,6 @@ export default {
   qa,
   spit,
   friend,
+  recruit,
   // ……
 }
