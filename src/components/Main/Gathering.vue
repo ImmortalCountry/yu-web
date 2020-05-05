@@ -1,7 +1,7 @@
 <template>
   <div class="div-gathering">
     <div style="width: 1000px; height: 60px; text-align: center; background-color: #13ce66">
-      <el-button style="margin-top: 10px" @click="openAddGathering">申请发布招聘信息</el-button>
+      <el-button style="margin-top: 10px" @click="openAddGathering">申请发布活动招信息</el-button>
     </div>
     <div class="content">
       <el-row :gutter="20">
