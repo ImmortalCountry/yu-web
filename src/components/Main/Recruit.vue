@@ -113,7 +113,7 @@
         this.recruitDialogVisible = true;
       },
       addDialogClosed() {
-        this.recruitDialogVisible = true;
+        this.recruitDialogVisible = false;
       },
     }
   }
