@@ -22,7 +22,7 @@
           </el-col>
           <el-col :span="7" style="height: 160px">
             <div class="btn">
-              <el-button circle icon="el-icon-view" style="background-color: red" @click="like(item.id)"></el-button>
+              <el-button circle icon="el-icon-view" @click="like(item.id)"></el-button>
             </div>
             <div class="btn">
               <el-button circle icon="el-icon-error" @click="noLike(item.id)"></el-button>
@@ -71,11 +71,11 @@
     },
     created() {
       this.user = this.$sessionUtils.getUserInfo();
-      this.getUserList(this.user.id);
+      this.getUserList();
     },
     methods: {
-      getUserList(exceptId) {
-        this.$api.user.userList(exceptId).then(res => {
+      getUserList() {
+        this.$api.user.userList().then(res => {
           if (res.flag) {
             this.userList = res.data;
           }
