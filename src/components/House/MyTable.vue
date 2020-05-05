@@ -59,7 +59,7 @@
       <!--      <div style="font-weight: bold;margin-left: 145px">-->
       <!--        兴趣-->
       <!--      </div>-->
-      <span style="font-weight: bold;margin-left: 45px;">兴趣</span>
+      <span style="font-weight: bold;margin-left: 30px;">兴趣</span>
       <textarea style="width: 263px; margin-left: 68px; height: 100px" v-model="userInfo.interest"></textarea>
     </div>
 
@@ -67,7 +67,7 @@
       <!--      <div style="font-weight: bold;margin-left: 145px">-->
       <!--        兴趣-->
       <!--      </div>-->
-      <span style="font-weight: bold; margin-left: 30px; ">个人简介</span>
+      <span style="font-weight: bold; margin-left: 15px; ">个人简介</span>
       <textarea style="width: 263px; margin-left: 51px; height: 100px" v-model="userInfo.personality"></textarea>
     </div>
     <div class="btn">
