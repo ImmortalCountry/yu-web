@@ -7,12 +7,22 @@
 <script>
   export default {
     data() {
-      return {}
+      return {
+        messageList: [],
+      }
     },
     created() {
-
+      this.getMessage();
     },
-    methods: {}
+    methods: {
+      getMessage() {
+        this.$message.notify.getMessageList().then(res => {
+          if (res.flag) {
+            this.messageList = res.data;
+          }
+        })
+      }
+    }
   }
 </script>
 

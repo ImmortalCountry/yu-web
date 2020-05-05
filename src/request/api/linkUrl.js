@@ -11,6 +11,7 @@ const linkUrl = {
   spitUrl:'/spit',
   friendUrl:'/friend',
   recruitUrl:'/recruit',
+  notifyUrl:'/notify'
 };
 
 export default linkUrl;

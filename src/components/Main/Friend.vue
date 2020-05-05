@@ -65,10 +65,10 @@
         userList: [],
         exceptId: '',
         user: '',
-        receiverId:'',
         messageDialogVisible: false,
         messageForm: {
           content: '',
+          receiverId:'',
         },
       }
     },
@@ -112,17 +112,18 @@
       },
       openSendMessage(receiverId) {
         this.messageDialogVisible = true;
-        this.receiverId = receiverId;
+        this.messageForm.receiverId = receiverId;
       },
       sendMessage() {
-        let arg = {
-          content: this.messageForm.content,
-        };
-        this.$api.friend.sendMessage(arg, this.receiverId).then(res => {
+        console.log("发送")
+        console.log(this.messageForm)
+        this.$api.notify.sendMessage(this.messageForm).then(res => {
           if (res.flag) {
             this.$message.success(res.message);
           }
+          console.log(this.messageDialogVisible)
           this.messageDialogVisible = false;
+          console.log(this.messageDialogVisible)
         });
       },
       addDialogClosed() {
