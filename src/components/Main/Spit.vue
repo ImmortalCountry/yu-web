@@ -100,7 +100,7 @@
     },
     methods: {
       isShowReply(item) {
-        if (item._id === this.showId){
+        if (item._id === this.showId) {
           item.isReply = true;
         }
         return item._id === this.showId || item.isReply
@@ -121,9 +121,11 @@
         this.spit.nickName = this.user.name;
         this.$api.spit.saveSpit(this.spit).then(res => {
           if (res.flag) {
-            this.$message.success(res.message);
             this.spit.content = '';
             this.getSpitList();
+            this.$message.success(res.message);
+          } else {
+            this.$message.error(res.message);
           }
         });
       },
@@ -139,12 +141,15 @@
             this.spitReply.content = '';
             this.showId = res.data;
             this.getSpitList();
+            this.$message.success(res.message)
+          } else {
+            this.$message.error(res.message)
           }
         });
       },
       showReply(item) {
-        this.showId='',
-        item.isReply = !item.isReply;
+        this.showId = '',
+          item.isReply = !item.isReply;
       },
     },
     components: {
